@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" pref="149" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel4" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel8" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel9" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel10" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel11" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel12" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <Component id="jLabel13" alignment="1" min="-2" pref="149" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="TxtM" max="32767" attributes="0"/>
+                          <Component id="TxtN" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtPh" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtP" max="32767" attributes="0"/>
+                          <Component id="TxtD" max="32767" attributes="0"/>
+                          <Component id="TxtNai" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtRes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtAn" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtPe" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtMe" alignment="0" max="32767" attributes="0"/>
+                          <Component id="TxtC1" max="32767" attributes="0"/>
+                          <Component id="TxtC2" alignment="0" pref="113" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
+                              <Component id="ComboRecherch" min="-2" pref="221" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="Rechercher" min="-2" pref="256" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="389" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                              <Component id="jLabel1" min="-2" pref="756" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="AjouterEtudiant" min="-2" pref="173" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="ModifierEtudiant" min="-2" pref="173" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="SuprimerEtudiant" min="-2" pref="173" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="BntActualiser" min="-2" pref="173" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jLabel1" min="-2" pref="39" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="TxtM" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Rechercher" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="ComboRecherch" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel4" max="32767" attributes="0"/>
+                          <Component id="TxtN" pref="31" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel5" max="32767" attributes="0"/>
+                          <Component id="TxtP" pref="31" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="TxtD" max="32767" attributes="0"/>
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel6" max="32767" attributes="0"/>
+                          <Component id="TxtC1" pref="31" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel7" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="TxtPh" min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="163" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel8" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="TxtNai" min="-2" pref="33" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel9" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="TxtRes" min="-2" pref="31" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel10" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="TxtAn" min="-2" pref="31" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel11" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="TxtC2" alignment="3" pref="31" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel12" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="TxtPe" min="-2" pref="31" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel13" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="TxtMe" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="AjouterEtudiant" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="ModifierEtudiant" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="SuprimerEtudiant" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                  <Component id="BntActualiser" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="36" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="        INSCRIPTIONS ETUDIANTS BIU"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Matricule   :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="DateNaiss :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Nom         :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Prenom     :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="sexe        :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel7">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Photo          :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Lieu Naiss   :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Lieu Reside :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel10">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Anne Acedem :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel11">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Faculite     :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel12">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Pere          :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel13">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Mere         :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="TxtC1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Masculin"/>
+            <StringItem index="1" value="Feminin"/>
+            <StringItem index="2" value="Autres"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtM">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtN">
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtPh">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtPhActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtP">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtPActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtD">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtDActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtNai">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtNaiActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtRes">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtResActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtAn">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtAnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtPe">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtPeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtMe">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtMeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="TxtC2">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="BST"/>
+            <StringItem index="1" value="BAM"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="AjouterEtudiant">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ajouter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AjouterEtudiantActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="ModifierEtudiant">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Modifier"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModifierEtudiantActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="SuprimerEtudiant">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Suprimer"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SuprimerEtudiantActionPerformed"/>
+      </Events>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="TableIns">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="11" rowCount="0">
+                <Column editable="true" title="Matricule" type="java.lang.Object"/>
+                <Column editable="true" title="Nom" type="java.lang.Object"/>
+                <Column editable="true" title="Prenom" type="java.lang.Object"/>
+                <Column editable="true" title="DateNaissance" type="java.lang.Object"/>
+                <Column editable="true" title="Sexe" type="java.lang.Object"/>
+                <Column editable="true" title="Photo" type="java.lang.Object"/>
+                <Column editable="true" title="LieuNaissance" type="java.lang.Object"/>
+                <Column editable="true" title="LieuResidence" type="java.lang.Object"/>
+                <Column editable="true" title="Anne Academic" type="java.lang.Object"/>
+                <Column editable="true" title="Pere" type="java.lang.Object"/>
+                <Column editable="true" title="Mere" type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TableInsMouseClicked"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JTextField" name="Rechercher">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RechercherActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="RechercherKeyReleased"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="ComboRecherch">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="Matricule"/>
+            <StringItem index="1" value="Nom"/>
+            <StringItem index="2" value="Prenom"/>
+            <StringItem index="3" value="Pere"/>
+            <StringItem index="4" value="Mere"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="BntActualiser">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Lucida Grande" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Actualiser"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BntActualiserActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
