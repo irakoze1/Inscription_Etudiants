@@ -5,14 +5,20 @@
  */
 package com.mycompany.inscription_etudiants;
 
+import java.awt.Graphics;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.DefaultTableModel;
@@ -183,7 +189,8 @@ public class Inscriptions extends javax.swing.JFrame {
                                 TxtP.setText(model.getValueAt(i, 2).toString());
                                 TxtD.setText(model.getValueAt(i, 3).toString());
                                 TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
-                                txt_choosen_file.setText(model.getValueAt(i, 5).toString());
+                                ImageIcon image = new ImageIcon(model.getValueAt(i, 5).toString());
+                                lbl_image.setIcon(scaledImage(image));
                                 TxtNai.setText(model.getValueAt(i, 6).toString());
                                 TxtRes.setText(model.getValueAt(i, 7).toString());
                                 TxtAn.setText(model.getValueAt(i, 8).toString());
@@ -193,6 +200,11 @@ public class Inscriptions extends javax.swing.JFrame {
                             } catch (Exception e) {
                          JOptionPane.showMessageDialog(null, "Probleme lors du clic sur la ligne du tableau ! " + e.getLocalizedMessage());
                     }
+                }
+                public ImageIcon scaledImage(ImageIcon img){
+                    Image image = img.getImage();
+                    image = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+                    return new ImageIcon(image);
                 }
                 /* FIN du Methode pour recuperer la ligne du tableau */
                 
@@ -313,6 +325,7 @@ public class Inscriptions extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         Rechercher = new javax.swing.JTextField();
         ComboRecherch = new javax.swing.JComboBox<>();
@@ -345,6 +358,8 @@ public class Inscriptions extends javax.swing.JFrame {
         TxtC2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         txt_choosen_file = new javax.swing.JLabel();
+        panel_image = new javax.swing.JPanel();
+        lbl_image = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         BntActualiser = new javax.swing.JButton();
         ModifierEtudiant = new javax.swing.JButton();
@@ -354,6 +369,10 @@ public class Inscriptions extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
 
         Rechercher.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,43 +384,34 @@ public class Inscriptions extends javax.swing.JFrame {
                 RechercherKeyReleased(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel4.add(Rechercher, gridBagConstraints);
 
         ComboRecherch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matricule", "Nom", "Prenom", "Pere", "Mere" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        jPanel4.add(ComboRecherch, gridBagConstraints);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INSCRIPTIONS ETUDIANTS BIU");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+        jPanel4.add(jLabel1, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ComboRecherch, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel1)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(20, 20, 20)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Rechercher, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboRecherch, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        getContentPane().add(jPanel4);
+        jPanel5.add(jPanel4);
 
         java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
         jPanel3Layout.columnWidths = new int[] {1};
@@ -433,7 +443,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.9;
         jPanel3.add(jScrollPane1, gridBagConstraints);
 
-        getContentPane().add(jPanel3);
+        jPanel5.add(jPanel3);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
@@ -469,7 +479,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
@@ -495,9 +504,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 15;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel6, gridBagConstraints);
@@ -509,9 +516,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel8, gridBagConstraints);
@@ -523,11 +528,9 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel9, gridBagConstraints);
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -539,7 +542,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 16;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel10, gridBagConstraints);
@@ -549,8 +551,8 @@ public class Inscriptions extends javax.swing.JFrame {
         jLabel11.setText("Faculite :");
         jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 46;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -562,9 +564,8 @@ public class Inscriptions extends javax.swing.JFrame {
         jLabel12.setText("Pere :");
         jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 46;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -576,11 +577,9 @@ public class Inscriptions extends javax.swing.JFrame {
         jLabel13.setText("Mere :");
         jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 12;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 11;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel13, gridBagConstraints);
@@ -589,7 +588,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
@@ -607,9 +605,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 105;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtN, gridBagConstraints);
@@ -620,7 +616,7 @@ public class Inscriptions extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 101;
@@ -648,11 +644,9 @@ public class Inscriptions extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 94;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtNai, gridBagConstraints);
@@ -667,7 +661,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 105;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtRes, gridBagConstraints);
@@ -682,7 +675,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 105;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtAn, gridBagConstraints);
@@ -693,9 +685,8 @@ public class Inscriptions extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 14;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 136;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -708,19 +699,18 @@ public class Inscriptions extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 14;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 102;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtMe, gridBagConstraints);
 
         TxtC2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BST", "BAM" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 14;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 30;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -742,14 +732,44 @@ public class Inscriptions extends javax.swing.JFrame {
         txt_choosen_file.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txt_choosen_file.setText("no file choosed.");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel1.add(txt_choosen_file, gridBagConstraints);
 
-        getContentPane().add(jPanel1);
+        panel_image.setBackground(new java.awt.Color(0, 153, 204));
+        panel_image.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createCompoundBorder(), javax.swing.BorderFactory.createCompoundBorder()));
+        panel_image.setMinimumSize(new java.awt.Dimension(100, 100));
+        panel_image.setPreferredSize(new java.awt.Dimension(100, 100));
+
+        lbl_image.setPreferredSize(new java.awt.Dimension(90, 90));
+
+        javax.swing.GroupLayout panel_imageLayout = new javax.swing.GroupLayout(panel_image);
+        panel_image.setLayout(panel_imageLayout);
+        panel_imageLayout.setHorizontalGroup(
+            panel_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_imageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panel_imageLayout.setVerticalGroup(
+            panel_imageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panel_imageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 10;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 7;
+        jPanel1.add(panel_image, gridBagConstraints);
+
+        jPanel5.add(jPanel1);
 
         BntActualiser.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         BntActualiser.setText("Actualiser");
@@ -810,7 +830,9 @@ public class Inscriptions extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2);
+        jPanel5.add(jPanel2);
+
+        getContentPane().add(jPanel5);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -826,22 +848,6 @@ public class Inscriptions extends javax.swing.JFrame {
     private void TxtNaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNaiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNaiActionPerformed
-
-    private void TxtResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtResActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtResActionPerformed
-
-    private void TxtAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtAnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtAnActionPerformed
-
-    private void TxtPeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPeActionPerformed
-
-    private void TxtMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtMeActionPerformed
 
     private void ModifierEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierEtudiantActionPerformed
         try {
@@ -921,9 +927,27 @@ public class Inscriptions extends javax.swing.JFrame {
         int response = fc.showOpenDialog(this);
         if(response==JFileChooser.APPROVE_OPTION){
             img = fc.getSelectedFile();
-            txt_choosen_file.setText(img.getAbsolutePath());
+            txt_choosen_file.setText(img.getName());
+            ImageIcon image = new ImageIcon(img.getAbsolutePath());
+            lbl_image.setIcon(scaledImage(image));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TxtMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtMeActionPerformed
+
+    private void TxtPeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtPeActionPerformed
+
+    private void TxtAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtAnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtAnActionPerformed
+
+    private void TxtResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtResActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtResActionPerformed
 
     /**
      * @param args the command line arguments
@@ -996,7 +1020,10 @@ public class Inscriptions extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_image;
+    private javax.swing.JPanel panel_image;
     private javax.swing.JLabel txt_choosen_file;
     // End of variables declaration//GEN-END:variables
 }
