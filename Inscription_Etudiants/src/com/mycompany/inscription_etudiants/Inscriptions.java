@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -84,7 +85,10 @@ public class Inscriptions extends javax.swing.JFrame {
                 public void AjouterEtudiant(){
                         String Nom = TxtN.getText().toUpperCase();
                         String Prenom = TxtP.getText();
-                        String DateNaissance = TxtD.getText();
+                        
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                        String DateNaissance = sdf.format(TxtD.getDate());
+                        
                         String Sexe = TxtC1.getSelectedItem().toString();
                         String Photo = txt_choosen_file.getText();
                         String LieuNaissance = TxtNai.getText();
@@ -96,7 +100,7 @@ public class Inscriptions extends javax.swing.JFrame {
                         
                          if(!TxtN.getText().equals("")&&
                            (!TxtP.getText().equals(""))&&
-                           (!TxtD.getText().equals(""))&&
+                           (!TxtD.getDate().equals(""))&&
                            (!TxtC1.getSelectedItem().equals(""))&&
                            (!txt_choosen_file.getText().equals(""))&&
                            (!TxtNai.getText().equals(""))&&
@@ -167,7 +171,7 @@ public class Inscriptions extends javax.swing.JFrame {
                            TxtM.setText("");
                            TxtN.setText("");
                            TxtP.setText("");
-                           TxtD.setText("");
+                           TxtD.getDate();
                            txt_choosen_file.setText("");
                            TxtNai.setText("");
                            TxtRes.setText("");
@@ -183,11 +187,13 @@ public class Inscriptions extends javax.swing.JFrame {
                 
                 /* Methode pour recuperer la ligne du tableau */
                 public void Recuper(int i){
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                        String DateNaissance = sdf.format(TxtD.getDate());
                         try {
                                 TxtM.setText(model.getValueAt(i, 0).toString());
                                 TxtN.setText(model.getValueAt(i, 1).toString());
                                 TxtP.setText(model.getValueAt(i, 2).toString());
-                                TxtD.setText(model.getValueAt(i, 3).toString());
+                                //DateNaissance(model.getValueAt(i, 3).getDate();
                                 TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                                 ImageIcon image = new ImageIcon(model.getValueAt(i, 5).toString());
                                 lbl_image.setIcon(scaledImage(image));
@@ -210,11 +216,13 @@ public class Inscriptions extends javax.swing.JFrame {
                 
                 /* Methode Pour Modifier un Etudiant*/
                  public void ModifierEtudiant(){
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                        String DateNaissance = sdf.format(TxtD.getDate());
                      
                         if(
                            !TxtN.getText().isEmpty()&
                            !TxtP.getText().isEmpty()&
-                           !TxtD.getText().isEmpty()&
+                           //!TxtD.getDate() &&
                            !TxtC1.getSelectedItem().toString().isEmpty()&
                            !txt_choosen_file.getText().isEmpty()&
                            !TxtNai.getText().isEmpty()&
@@ -231,7 +239,7 @@ public class Inscriptions extends javax.swing.JFrame {
                            stm.executeUpdate("UPDATE inscription SET "
                                 + "nom='"+TxtN.getText()+"'"
                                 + ",prenom='"+ TxtP.getText()+"',"
-                                + "datenaissance='"+TxtD.getText()+"'"
+                                + "datenaissance='"+TxtD.getDate()+"'"
                                 + ",sexe='"+TxtC1.getSelectedItem()+"'"
                                 + ",photo='"+img.getAbsolutePath()+"'"
                                 + ",lieunaissance='"+TxtNai.getText()+"'"
@@ -281,7 +289,7 @@ public class Inscriptions extends javax.swing.JFrame {
                     TxtM.setText(model.getValueAt(i, 0).toString());
                     TxtN.setText(model.getValueAt(i, 1).toString());
                     TxtP.setText(model.getValueAt(i, 2).toString());
-                    TxtD.setText(model.getValueAt(i, 3).toString());
+                    //TxtD.setText(model.getValueAt(i, 3).toString());
                     TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                     txt_choosen_file.setText(model.getValueAt(i, 5).toString());
                     TxtNai.setText(model.getValueAt(i, 6).toString());
@@ -349,7 +357,6 @@ public class Inscriptions extends javax.swing.JFrame {
         TxtM = new javax.swing.JTextField();
         TxtN = new javax.swing.JTextField();
         TxtP = new javax.swing.JTextField();
-        TxtD = new javax.swing.JTextField();
         TxtNai = new javax.swing.JTextField();
         TxtRes = new javax.swing.JTextField();
         TxtAn = new javax.swing.JTextField();
@@ -360,6 +367,7 @@ public class Inscriptions extends javax.swing.JFrame {
         txt_choosen_file = new javax.swing.JLabel();
         panel_image = new javax.swing.JPanel();
         lbl_image = new javax.swing.JLabel();
+        TxtD = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         BntActualiser = new javax.swing.JButton();
         ModifierEtudiant = new javax.swing.JButton();
@@ -624,20 +632,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtP, gridBagConstraints);
 
-        TxtD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 101;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtD, gridBagConstraints);
-
         TxtNai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtNaiActionPerformed(evt);
@@ -673,7 +667,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
@@ -769,6 +763,14 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 7;
         jPanel1.add(panel_image, gridBagConstraints);
 
+        TxtD.setMaximumSize(new java.awt.Dimension(320, 31567));
+        TxtD.setMinimumSize(new java.awt.Dimension(112, 27));
+        TxtD.setPreferredSize(new java.awt.Dimension(222, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(TxtD, gridBagConstraints);
+
         jPanel5.add(jPanel1);
 
         BntActualiser.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -840,10 +842,6 @@ public class Inscriptions extends javax.swing.JFrame {
     private void TxtPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtPActionPerformed
-
-    private void TxtDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtDActionPerformed
 
     private void TxtNaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNaiActionPerformed
         // TODO add your handling code here:
@@ -995,7 +993,7 @@ public class Inscriptions extends javax.swing.JFrame {
     private javax.swing.JTextField TxtAn;
     private javax.swing.JComboBox<String> TxtC1;
     private javax.swing.JComboBox<String> TxtC2;
-    private javax.swing.JTextField TxtD;
+    private com.toedter.calendar.JDateChooser TxtD;
     private javax.swing.JTextField TxtM;
     private javax.swing.JTextField TxtMe;
     private javax.swing.JTextField TxtN;
