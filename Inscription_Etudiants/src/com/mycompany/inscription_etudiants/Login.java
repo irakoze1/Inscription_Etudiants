@@ -25,13 +25,13 @@ public class Login extends javax.swing.JFrame {
     private String userName;
     private String passWord;
     private String profil;
-    private Inscriptions inscr;
+    private DashBoard inscr;
     
     public void signin(){
         try
         {
                   userName = TxtNom.getText();
-                 passWord = jfPassword.getText();
+                  passWord = jfPassword.getText();
         
                   if(!userName.equalsIgnoreCase("")  && !passWord.equalsIgnoreCase("") )
                  {
@@ -50,17 +50,17 @@ public class Login extends javax.swing.JFrame {
                            {
                                case "Administrateur":
                                {
-                                   inscr = new Inscriptions();
+                                   inscr = new DashBoard();
                                    inscr.setVisible(true);
-                                   //inscr.jLabel2.setText(profil);
+                                   //inscr.aff.setText(profil);
                                    this.dispose();
                                    break;
                                }
                                case "Assistant":
                                {
-                                   inscr = new Inscriptions();
+                                   inscr = new DashBoard();
                                    inscr.setVisible(true);
-                                   //inscr.jLabel2.setText(profil);
+                                   //inscr.aff.setText(profil);
                                    this.dispose();
                                    break;
                                }
@@ -95,6 +95,8 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         TxtNom = new javax.swing.JTextField();
@@ -104,12 +106,21 @@ public class Login extends javax.swing.JFrame {
         jfPassword = new javax.swing.JPasswordField();
         jPanel3 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
+
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel5.setText(" X");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -213,19 +224,6 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 280, 380));
-
-        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel5.setText("  X");
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -233,13 +231,19 @@ public class Login extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 324, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(473, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 360, 520));
@@ -270,17 +274,17 @@ public class Login extends javax.swing.JFrame {
                            {
                                case "Administrateur":
                                {
-                                   inscr = new Inscriptions();
+                                   inscr = new DashBoard();
                                    inscr.setVisible(true);
-                                   //inscr.jLabel2.setText(profil);
+                                   //inscr.jLabel14.setText(profil);
                                    this.dispose();
                                    break;
                                }
                                case "Assistant":
                                {
-                                   inscr = new Inscriptions();
+                                   inscr = new DashBoard();
                                    inscr.setVisible(true);
-                                   //inscr.jLabel2.setText(profil);
+                                   //inscr.jLabel14.setText(profil);
                                    this.dispose();
                                    break;
                                }
@@ -294,9 +298,9 @@ public class Login extends javax.swing.JFrame {
                  {
                         JOptionPane.showMessageDialog(null,"il faut renseigner toutes les informations","Erreur d'authentification", JOptionPane.ERROR);
                 }
-        }catch(SQLException | HeadlessException e){
-            JOptionPane.showMessageDialog(null,"il faut renseigner toutes les informations","Erreur d'authentification", JOptionPane.ERROR);
-        }
+            }catch(SQLException | HeadlessException e){
+                JOptionPane.showMessageDialog(null,"il faut renseigner toutes les informations","Erreur d'authentification", JOptionPane.ERROR);
+            }
     }//GEN-LAST:event_TxtNomActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
