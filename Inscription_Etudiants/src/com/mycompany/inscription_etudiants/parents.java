@@ -103,7 +103,8 @@ public class parents extends javax.swing.JFrame {
                                              + ",'"+NomMere+"','"+PrenomMere+"'"
                                              + ",'"+FonctionPere+"','"+FoctionMere+"'"
                                              + ",'"+Address+"')";
-                                        stm.executeUpdate(SqlRe);         
+                                        stm.executeUpdate(SqlRe);
+                                        
 
                                        }catch(Exception e)
                                        {
@@ -318,6 +319,7 @@ public class parents extends javax.swing.JFrame {
         ModifierEtudiant = new javax.swing.JButton();
         SuprimerEtudiant = new javax.swing.JButton();
         AjouterEtudiant = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -662,6 +664,15 @@ public class parents extends javax.swing.JFrame {
 
         jPanel5.add(jPanel2);
 
+        jButton1.setBackground(new java.awt.Color(0, 255, 204));
+        jButton1.setText("DashBoard");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton1);
+
         getContentPane().add(jPanel5);
 
         pack();
@@ -678,6 +689,8 @@ public class parents extends javax.swing.JFrame {
     private void ModifierEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierEtudiantActionPerformed
         try {
                 ModifierParent();
+                Vider();
+                ActualiserParents();
                         
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null,"erreur de modification" + e.getLocalizedMessage());
@@ -685,11 +698,15 @@ public class parents extends javax.swing.JFrame {
     }//GEN-LAST:event_ModifierEtudiantActionPerformed
 
     private void SuprimerEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuprimerEtudiantActionPerformed
-        SupprimerParent();
+                SupprimerParent();
+                Vider();
+                ActualiserParents();
     }//GEN-LAST:event_SuprimerEtudiantActionPerformed
 
     private void AjouterEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterEtudiantActionPerformed
-        AjouterParent();
+                AjouterParent();
+                Vider();
+                ActualiserParents();
     }//GEN-LAST:event_AjouterEtudiantActionPerformed
 
     private void RechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RechercherActionPerformed
@@ -769,6 +786,10 @@ public class parents extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNMereActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new DashBoard().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -821,6 +842,7 @@ public class parents extends javax.swing.JFrame {
     private javax.swing.JTextField TxtPMere;
     private javax.swing.JTextField TxtPPere;
     private javax.swing.JTextField Txtidp;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

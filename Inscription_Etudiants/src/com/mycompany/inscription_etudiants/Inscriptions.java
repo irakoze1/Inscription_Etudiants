@@ -342,6 +342,7 @@ public class Inscriptions extends javax.swing.JFrame {
         Rechercher = new javax.swing.JTextField();
         ComboRecherch = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableIns = new javax.swing.JTable();
@@ -377,6 +378,7 @@ public class Inscriptions extends javax.swing.JFrame {
         ModifierEtudiant = new javax.swing.JButton();
         SuprimerEtudiant = new javax.swing.JButton();
         AjouterEtudiant = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -422,6 +424,9 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel4.add(jLabel1, gridBagConstraints);
+
+        jButton2.setText("jButton2");
+        jPanel4.add(jButton2, new java.awt.GridBagConstraints());
 
         jPanel5.add(jPanel4);
 
@@ -838,6 +843,15 @@ public class Inscriptions extends javax.swing.JFrame {
 
         jPanel5.add(jPanel2);
 
+        jButton3.setBackground(new java.awt.Color(0, 255, 204));
+        jButton3.setText("DashBoard");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton3);
+
         getContentPane().add(jPanel5);
 
         pack();
@@ -974,6 +988,10 @@ public class Inscriptions extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtPActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new DashBoard().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1029,6 +1047,8 @@ public class Inscriptions extends javax.swing.JFrame {
     private javax.swing.JTextField TxtPe;
     private javax.swing.JTextField TxtRes;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

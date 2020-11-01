@@ -7,9 +7,12 @@ package com.mycompany.inscription_etudiants;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,7 +55,7 @@ public class Login extends javax.swing.JFrame {
                                {
                                    inscr = new DashBoard();
                                    inscr.setVisible(true);
-                                   //inscr.aff.setText(profil);
+                                   inscr.profil.setText(profil);
                                    this.dispose();
                                    break;
                                }
@@ -60,7 +63,7 @@ public class Login extends javax.swing.JFrame {
                                {
                                    inscr = new DashBoard();
                                    inscr.setVisible(true);
-                                   //inscr.aff.setText(profil);
+                                   inscr.profil.setText(profil);
                                    this.dispose();
                                    break;
                                }
@@ -308,7 +311,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        signin();
+        
+            signin();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
