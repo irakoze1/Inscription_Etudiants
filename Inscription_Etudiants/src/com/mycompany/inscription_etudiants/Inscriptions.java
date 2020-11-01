@@ -39,7 +39,8 @@ public class Inscriptions extends javax.swing.JFrame {
                 private Statement stm;
                 private final DefaultTableModel model;
                 private final int ETAT = 1;
-    private File img;
+                private File img;
+    private Object tonComposantDate;
         
     // Methode pour affichage 
                 public void AfficherEtudiants(){
@@ -98,17 +99,19 @@ public class Inscriptions extends javax.swing.JFrame {
                         String Pere = TxtPe.getText();
                         String Mere = TxtMe.getText();
                         
-                         if(!TxtN.getText().equals("")&&
-                           (!TxtP.getText().equals(""))&&
-                           (!TxtD.getDate().equals(""))&&
-                           (!TxtC1.getSelectedItem().equals(""))&&
-                           (!txt_choosen_file.getText().equals(""))&&
-                           (!TxtNai.getText().equals(""))&&
-                           (!TxtRes.getText().equals(""))&&
-                           (!TxtAn.getText().equals(""))&&
-                           (!TxtC2.getSelectedItem().equals(""))&&
-                           (!TxtPe.getText().equals(""))&&
-                           (!TxtMe.getText().equals("")));
+                         if(
+                           !TxtN.getText().isEmpty()&
+                           !TxtP.getText().isEmpty()&
+                           !TxtD.getDate().equals("")&
+                           !TxtC1.getSelectedItem().toString().isEmpty()&
+                           !txt_choosen_file.getText().isEmpty()&
+                           !TxtNai.getText().isEmpty()&
+                           !TxtRes.getText().isEmpty()&
+                           !TxtAn.getText().isEmpty()&
+                           !TxtC2.getSelectedItem().toString().isEmpty()&
+                           !TxtPe.getText().isEmpty()&
+                           !TxtMe.getText().isEmpty()
+                           );
                          {
                              try{
                                  con = Connecter.getConnection();
@@ -167,7 +170,6 @@ public class Inscriptions extends javax.swing.JFrame {
                 /* Methode Pour Vide */
                 public void Vider(){
                         try {
-                            
                            TxtM.setText("");
                            TxtN.setText("");
                            TxtP.setText("");
@@ -193,7 +195,7 @@ public class Inscriptions extends javax.swing.JFrame {
                                 TxtM.setText(model.getValueAt(i, 0).toString());
                                 TxtN.setText(model.getValueAt(i, 1).toString());
                                 TxtP.setText(model.getValueAt(i, 2).toString());
-                                //DateNaissance(model.getValueAt(i, 3).getDate();
+                                //TxtD.format(model.getValueAt(i, 3).toDate());
                                 TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                                 ImageIcon image = new ImageIcon(model.getValueAt(i, 5).toString());
                                 lbl_image.setIcon(scaledImage(image));
@@ -207,11 +209,13 @@ public class Inscriptions extends javax.swing.JFrame {
                          JOptionPane.showMessageDialog(null, "Probleme lors du clic sur la ligne du tableau ! " + e.getLocalizedMessage());
                     }
                 }
+                
                 public ImageIcon scaledImage(ImageIcon img){
                     Image image = img.getImage();
                     image = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
                     return new ImageIcon(image);
                 }
+                
                 /* FIN du Methode pour recuperer la ligne du tableau */
                 
                 /* Methode Pour Modifier un Etudiant*/
@@ -222,26 +226,28 @@ public class Inscriptions extends javax.swing.JFrame {
                         if(
                            !TxtN.getText().isEmpty()&
                            !TxtP.getText().isEmpty()&
-                           //!TxtD.getDate() &&
+                           !(sdf.format(TxtD.getDate()).isEmpty()) &
                            !TxtC1.getSelectedItem().toString().isEmpty()&
                            !txt_choosen_file.getText().isEmpty()&
                            !TxtNai.getText().isEmpty()&
-                           !TxtRes.getText().isEmpty()&
-                           !TxtAn.getText().isEmpty()&
+                           !TxtAn.getText().isEmpty() &
                            !TxtC2.getSelectedItem().toString().isEmpty()&
                            !TxtPe.getText().isEmpty()&
-                           !TxtMe.getText().isEmpty());
+                           !TxtRes.getText().isEmpty()&
+                           !TxtMe.getText().isEmpty()
+                        )
                    {
                     try{
                         con = Connecter.getConnection();
                            stm=con.createStatement();
+                           String Photo = txt_choosen_file.getText();
                            
                            stm.executeUpdate("UPDATE inscription SET "
                                 + "nom='"+TxtN.getText()+"'"
                                 + ",prenom='"+ TxtP.getText()+"',"
-                                + "datenaissance='"+TxtD.getDate()+"'"
+                                + "datenaissance='"+sdf.format(TxtD.getDate())+"'"
                                 + ",sexe='"+TxtC1.getSelectedItem()+"'"
-                                + ",photo='"+img.getAbsolutePath()+"'"
+                                + ",photo='"+Photo+"'"
                                 + ",lieunaissance='"+TxtNai.getText()+"'"
                                 + ",lieuresidence='"+TxtRes.getText()+"'"
                                 + ",anneacademic='"+TxtAn.getText()+"'"   
@@ -249,16 +255,12 @@ public class Inscriptions extends javax.swing.JFrame {
                                 + ",pere='"+TxtPe.getText()+"'"
                                 + ",mere='"+TxtMe.getText()+"'"       
                                 + " WHERE matricule="+TxtM.getText());
-                  
-                  ActualiserEtudiants();
-                  
+                           
                   JOptionPane.showMessageDialog(null, "Modification effectuée!!!");
                  }catch(HeadlessException | SQLException e)
                  {
-                     System.err.println(e);
-                // JOptionPane.showMessageDialog(null, 
-                   //      "Veuillez sélectionner l'enregistrement "
-                     //            + "que vous voulez modifier!!!");   
+                     //System.err.println(" Erreur de Modification effectuée!!!");
+                    JOptionPane.showMessageDialog(null, " Erreur de Modification tof effectuée!!!"+ e);   
                  }         
              }
           }
@@ -288,12 +290,14 @@ public class Inscriptions extends javax.swing.JFrame {
            try {
                     TxtM.setText(model.getValueAt(i, 0).toString());
                     TxtN.setText(model.getValueAt(i, 1).toString());
-                    TxtP.setText(model.getValueAt(i, 2).toString());
-                    //TxtD.setText(model.getValueAt(i, 3).toString());
+                    TxtRes.setText(model.getValueAt(i, 2).toString());
+                    
+                    //TxtD.getDate(model.getValueAt(i, 3).toString());
+                    
                     TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                     txt_choosen_file.setText(model.getValueAt(i, 5).toString());
                     TxtNai.setText(model.getValueAt(i, 6).toString());
-                    TxtRes.setText(model.getValueAt(i, 7).toString());
+                    TxtP.setText(model.getValueAt(i, 7).toString());
                     TxtAn.setText(model.getValueAt(i, 8).toString());
                     TxtC2.setSelectedItem(model.getValueAt(i, 9).toString());
                     TxtPe.setText(model.getValueAt(i, 10).toString());
@@ -356,9 +360,9 @@ public class Inscriptions extends javax.swing.JFrame {
         TxtC1 = new javax.swing.JComboBox<>();
         TxtM = new javax.swing.JTextField();
         TxtN = new javax.swing.JTextField();
-        TxtP = new javax.swing.JTextField();
-        TxtNai = new javax.swing.JTextField();
         TxtRes = new javax.swing.JTextField();
+        TxtNai = new javax.swing.JTextField();
+        TxtP = new javax.swing.JTextField();
         TxtAn = new javax.swing.JTextField();
         TxtPe = new javax.swing.JTextField();
         TxtMe = new javax.swing.JTextField();
@@ -494,7 +498,7 @@ public class Inscriptions extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Prenom :");
+        jLabel5.setText("Residence :");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
@@ -531,7 +535,7 @@ public class Inscriptions extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Residence :");
+        jLabel9.setText("Prenom :");
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -618,9 +622,9 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtN, gridBagConstraints);
 
-        TxtP.addActionListener(new java.awt.event.ActionListener() {
+        TxtRes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtPActionPerformed(evt);
+                TxtResActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -630,7 +634,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 101;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtP, gridBagConstraints);
+        jPanel1.add(TxtRes, gridBagConstraints);
 
         TxtNai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -645,9 +649,9 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtNai, gridBagConstraints);
 
-        TxtRes.addActionListener(new java.awt.event.ActionListener() {
+        TxtP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtResActionPerformed(evt);
+                TxtPActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -657,7 +661,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtRes, gridBagConstraints);
+        jPanel1.add(TxtP, gridBagConstraints);
 
         TxtAn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -839,29 +843,31 @@ public class Inscriptions extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TxtPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPActionPerformed
+    private void TxtResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtResActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPActionPerformed
+    }//GEN-LAST:event_TxtResActionPerformed
 
     private void TxtNaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNaiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNaiActionPerformed
 
     private void ModifierEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierEtudiantActionPerformed
-        try {
+        
                 ModifierEtudiant();
+                ActualiserEtudiants();
                         
-        } catch (Exception e) {
-             JOptionPane.showMessageDialog(null,"erreur de modification" + e.getLocalizedMessage());
-        }
     }//GEN-LAST:event_ModifierEtudiantActionPerformed
 
     private void SuprimerEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuprimerEtudiantActionPerformed
         SupprimerEtudienat();
+        Vider();
+        ActualiserEtudiants();
     }//GEN-LAST:event_SuprimerEtudiantActionPerformed
 
     private void AjouterEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterEtudiantActionPerformed
         AjouterEtudiant();
+        Vider();
+        ActualiserEtudiants();
     }//GEN-LAST:event_AjouterEtudiantActionPerformed
 
     private void RechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RechercherActionPerformed
@@ -921,14 +927,35 @@ public class Inscriptions extends javax.swing.JFrame {
     }//GEN-LAST:event_TableInsMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser fc = new JFileChooser();
+       /* JFileChooser fc = new JFileChooser();
         int response = fc.showOpenDialog(this);
         if(response==JFileChooser.APPROVE_OPTION){
             img = fc.getSelectedFile();
             txt_choosen_file.setText(img.getName());
             ImageIcon image = new ImageIcon(img.getAbsolutePath());
             lbl_image.setIcon(scaledImage(image));
+        }*/
+       try{ 
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            txt_choosen_file.setText(filename);
+
+
+            Image getAbsolutePath = null;
+            
+            ImageIcon icon =new ImageIcon(filename);
+            Image Foto = icon.getImage();
+            Image modImag = Foto.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
+            icon= new ImageIcon(modImag);
+            lbl_image.setIcon(icon);
+            
+       }catch (Exception e) 
+       {
+           JOptionPane.showMessageDialog(null, "Probleme de recuperation de l'image ! " + e.getLocalizedMessage());
         }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void TxtMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMeActionPerformed
@@ -943,9 +970,9 @@ public class Inscriptions extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtAnActionPerformed
 
-    private void TxtResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtResActionPerformed
+    private void TxtPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtResActionPerformed
+    }//GEN-LAST:event_TxtPActionPerformed
 
     /**
      * @param args the command line arguments
