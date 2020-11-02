@@ -5,6 +5,7 @@
  */
 package com.mycompany.inscription_etudiants;
 
+import com.toedter.calendar.JCalendar;
 import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -16,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -40,7 +42,8 @@ public class Inscriptions extends javax.swing.JFrame {
                 private final DefaultTableModel model;
                 private final int ETAT = 1;
                 private File img;
-    private Object tonComposantDate;
+                private Object tonComposantDate;
+                private JCalendar theCalendar;
         
     // Methode pour affichage 
                 public void AfficherEtudiants(){
@@ -174,7 +177,7 @@ public class Inscriptions extends javax.swing.JFrame {
                            TxtN.setText("");
                            TxtP.setText("");
                            TxtD.getDate();
-                           txt_choosen_file.setText("");
+                           lbl_image.setText("");
                            TxtNai.setText("");
                            TxtRes.setText("");
                            TxtAn.setText("");
@@ -189,13 +192,15 @@ public class Inscriptions extends javax.swing.JFrame {
                 
                 /* Methode pour recuperer la ligne du tableau */
                 public void Recuper(int i){
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-                        String DateNaissance = sdf.format(TxtD.getDate());
+                        
                         try {
                                 TxtM.setText(model.getValueAt(i, 0).toString());
                                 TxtN.setText(model.getValueAt(i, 1).toString());
                                 TxtP.setText(model.getValueAt(i, 2).toString());
-                                //TxtD.format(model.getValueAt(i, 3).toDate());
+                                
+                               Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 3));
+                                TxtD.setDate(date);
+                                
                                 TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                                 ImageIcon image = new ImageIcon(model.getValueAt(i, 5).toString());
                                 lbl_image.setIcon(scaledImage(image));
@@ -205,6 +210,7 @@ public class Inscriptions extends javax.swing.JFrame {
                                 TxtC2.setSelectedItem(model.getValueAt(i, 9).toString());
                                 TxtPe.setText(model.getValueAt(i, 10).toString());
                                 TxtMe.setText(model.getValueAt(i, 11).toString());
+                                
                             } catch (Exception e) {
                          JOptionPane.showMessageDialog(null, "Probleme lors du clic sur la ligne du tableau ! " + e.getLocalizedMessage());
                     }
@@ -213,6 +219,7 @@ public class Inscriptions extends javax.swing.JFrame {
                 public ImageIcon scaledImage(ImageIcon img){
                     Image image = img.getImage();
                     image = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+                    Vider();
                     return new ImageIcon(image);
                 }
                 
@@ -292,7 +299,8 @@ public class Inscriptions extends javax.swing.JFrame {
                     TxtN.setText(model.getValueAt(i, 1).toString());
                     TxtRes.setText(model.getValueAt(i, 2).toString());
                     
-                    //TxtD.getDate(model.getValueAt(i, 3).toString());
+                   Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 3));
+                    TxtD.setDate(date);
                     
                     TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                     txt_choosen_file.setText(model.getValueAt(i, 5).toString());
@@ -869,7 +877,7 @@ public class Inscriptions extends javax.swing.JFrame {
         
                 ModifierEtudiant();
                 ActualiserEtudiants();
-                        
+                 Vider();       
     }//GEN-LAST:event_ModifierEtudiantActionPerformed
 
     private void SuprimerEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuprimerEtudiantActionPerformed
@@ -964,6 +972,7 @@ public class Inscriptions extends javax.swing.JFrame {
             Image modImag = Foto.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
             icon= new ImageIcon(modImag);
             lbl_image.setIcon(icon);
+            Vider();
             
        }catch (Exception e) 
        {

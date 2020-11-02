@@ -38,7 +38,7 @@ public class parents extends javax.swing.JFrame {
                 private Statement stm;
                 private final DefaultTableModel model;
                 private final int ETAT = 1;
-    private File img;
+                private File img;
         
     // Methode pour affichage 
                 public void AfficherParents(){
@@ -95,6 +95,7 @@ public class parents extends javax.swing.JFrame {
                              try{
                                  con = Connecter.getConnection();
                                     stm = con.createStatement();
+                                    rs = stm.executeQuery("SELECT matricule FROM inscription WHERE etat = 0");
                                      String SqlRe = "insert into parents "
                                              + "(nompere,prenompere,"
                                              + "nommere,prenommere,"
@@ -314,6 +315,8 @@ public class parents extends javax.swing.JFrame {
         TxtPPere = new javax.swing.JTextField();
         TxtPMere = new javax.swing.JTextField();
         TxtAdd = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         BntActualiser = new javax.swing.JButton();
         ModifierEtudiant = new javax.swing.JButton();
@@ -601,6 +604,23 @@ public class parents extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtAdd, gridBagConstraints);
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel3.setText("Ajouter EtudiantID");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        jPanel1.add(jLabel3, gridBagConstraints);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        jPanel1.add(jComboBox1, gridBagConstraints);
+
         jPanel5.add(jPanel1);
 
         BntActualiser.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
@@ -747,7 +767,7 @@ public class parents extends javax.swing.JFrame {
                              });
                         }
                         if(Verify){
-                             JOptionPane.showMessageDialog(null,"Desolef il n'y a pas des resultats sur votre recherche");
+                             JOptionPane.showMessageDialog(null,"Desole il n'y a pas des resultats sur votre recherche");
                         }
                         TableIns.setModel(model);
                 }
@@ -843,11 +863,13 @@ public class parents extends javax.swing.JFrame {
     private javax.swing.JTextField TxtPPere;
     private javax.swing.JTextField Txtidp;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
