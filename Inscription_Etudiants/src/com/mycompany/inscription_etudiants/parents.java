@@ -50,6 +50,7 @@ public class parents extends javax.swing.JFrame {
                        model.addColumn("Fonction Pere");
                        model.addColumn("Fonction Mere");
                        model.addColumn("Address");
+                       model.addColumn("Nom Enfant");
                        try {
                             con = Connecter.getConnection();
                             stm = con.createStatement();
@@ -62,7 +63,8 @@ public class parents extends javax.swing.JFrame {
                                         rs.getString("prenommere"),
                                         rs.getString("fonctionpere"),
                                         rs.getString("fonctionmere"),
-                                        rs.getString("address")
+                                        rs.getString("address"),
+                                        rs.getString("matricule")
                                     });
                                     }
                     } catch (SQLException e) {
@@ -81,6 +83,7 @@ public class parents extends javax.swing.JFrame {
                         String PrenomMere = TxtPMere.getText();
                         String FoctionMere = TxtFMere.getText();
                         String Address = TxtAdd.getText();
+                        String idetudiant = idetud.getToolTipText();
                         
                          if(
                            !TxtNPere.getText().isEmpty()&
@@ -89,7 +92,8 @@ public class parents extends javax.swing.JFrame {
                            !TxtNMere.getText().isEmpty()&
                            !TxtPMere.getText().isEmpty()&
                            !TxtFMere.getText().isEmpty()&
-                           !TxtAdd.getText().isEmpty()
+                           !TxtAdd.getText().isEmpty()&
+                           !idetud.getSelectedItem().toString().isEmpty()
                            );
                          {
                              try{
@@ -99,11 +103,11 @@ public class parents extends javax.swing.JFrame {
                                      String SqlRe = "insert into parents "
                                              + "(nompere,prenompere,"
                                              + "nommere,prenommere,"
-                                             + "fonctionmere,fonctionpere,address)"
+                                             + "fonctionmere,fonctionpere,address,matricule)"
                                              + "VALUES('"+NomPere+"','"+PrenomPere+"'"
                                              + ",'"+NomMere+"','"+PrenomMere+"'"
                                              + ",'"+FonctionPere+"','"+FoctionMere+"'"
-                                             + ",'"+Address+"')";
+                                             + ",'"+Address+",'"+idetudiant+"' )";
                                         stm.executeUpdate(SqlRe);
                                         
 
@@ -122,7 +126,7 @@ public class parents extends javax.swing.JFrame {
                            model.setRowCount(0);
                             con = Connecter.getConnection();
                             stm = con.createStatement();
-                            rs = stm.executeQuery("SELECT * FROM parents WHERE etat = 0 ORDER BY idp DESC");
+                            rs = stm.executeQuery("SELECT * FROM parents join inscription on parents = inscrition.nom WHERE etat = 0 ORDER BY idp DESC");
                                     while(rs.next()){
                                            model.addRow(new Object[]{
                                                 rs.getString("idp"),
@@ -132,7 +136,8 @@ public class parents extends javax.swing.JFrame {
                                                 rs.getString("prenommere"),
                                                 rs.getString("fonctionpere"),
                                                 rs.getString("fonctionmere"),
-                                                rs.getString("address")
+                                                rs.getString("address"),
+                                                rs.getString("nom")
                                            });
                                     }
                     } catch (SQLException e) {
@@ -274,10 +279,27 @@ public class parents extends javax.swing.JFrame {
                 return "";
 }
         
+                //method pour le combo 
+                
+                public void combo(){
+                    String sql = "select * from inscription where etat = 0";
+                    try {
+                        con = Connecter.getConnection();
+                       stm=con.createStatement();
+                       rs = stm.executeQuery(sql);
+                       while(rs.next()){
+                           idetud.addItem(rs.getString("nom"));
+                       }
+                }catch(Exception e){
+                 
+                JOptionPane.showMessageDialog(null,"erreur de replissage");
+             }
+                }
     public parents() {
         this.model = new DefaultTableModel();
         initComponents();
         AfficherParents();
+        combo();
     }
 
     /**
@@ -316,7 +338,7 @@ public class parents extends javax.swing.JFrame {
         TxtPMere = new javax.swing.JTextField();
         TxtAdd = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        idetud = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         BntActualiser = new javax.swing.JButton();
         ModifierEtudiant = new javax.swing.JButton();
@@ -570,7 +592,7 @@ public class parents extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
@@ -613,13 +635,18 @@ public class parents extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 2;
         jPanel1.add(jLabel3, gridBagConstraints);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        idetud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idetudActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 9;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.gridheight = 2;
-        jPanel1.add(jComboBox1, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(idetud, gridBagConstraints);
 
         jPanel5.add(jPanel1);
 
@@ -810,6 +837,10 @@ public class parents extends javax.swing.JFrame {
         new DashBoard().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void idetudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idetudActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idetudActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -862,8 +893,8 @@ public class parents extends javax.swing.JFrame {
     private javax.swing.JTextField TxtPMere;
     private javax.swing.JTextField TxtPPere;
     private javax.swing.JTextField Txtidp;
+    private javax.swing.JComboBox<String> idetud;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;

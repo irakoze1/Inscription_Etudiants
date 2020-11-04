@@ -42,8 +42,6 @@ public class Inscriptions extends javax.swing.JFrame {
                 private final DefaultTableModel model;
                 private final int ETAT = 1;
                 private File img;
-                private Object tonComposantDate;
-                private JCalendar theCalendar;
         
     // Methode pour affichage 
                 public void AfficherEtudiants(){
@@ -176,8 +174,11 @@ public class Inscriptions extends javax.swing.JFrame {
                            TxtM.setText("");
                            TxtN.setText("");
                            TxtP.setText("");
-                           TxtD.getDate();
-                           lbl_image.setText("");
+                          //Date TxtD = new SimpleDateFormat("yyyy-MM-dd").parse((""));
+                          //TxtD.setVisible(false);
+                           txt_choosen_file.setText("");
+                           txt_choosen_file.setVisible(false);
+                           lbl_image.setVisible(false);
                            TxtNai.setText("");
                            TxtRes.setText("");
                            TxtAn.setText("");
@@ -198,12 +199,14 @@ public class Inscriptions extends javax.swing.JFrame {
                                 TxtN.setText(model.getValueAt(i, 1).toString());
                                 TxtP.setText(model.getValueAt(i, 2).toString());
                                 
-                               Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 3));
+                                Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 3));
                                 TxtD.setDate(date);
                                 
                                 TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
+                                
                                 ImageIcon image = new ImageIcon(model.getValueAt(i, 5).toString());
                                 lbl_image.setIcon(scaledImage(image));
+                                
                                 TxtNai.setText(model.getValueAt(i, 6).toString());
                                 TxtRes.setText(model.getValueAt(i, 7).toString());
                                 TxtAn.setText(model.getValueAt(i, 8).toString());
@@ -219,7 +222,6 @@ public class Inscriptions extends javax.swing.JFrame {
                 public ImageIcon scaledImage(ImageIcon img){
                     Image image = img.getImage();
                     image = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
-                    Vider();
                     return new ImageIcon(image);
                 }
                 
@@ -297,15 +299,15 @@ public class Inscriptions extends javax.swing.JFrame {
            try {
                     TxtM.setText(model.getValueAt(i, 0).toString());
                     TxtN.setText(model.getValueAt(i, 1).toString());
-                    TxtRes.setText(model.getValueAt(i, 2).toString());
+                    TxtP.setText(model.getValueAt(i, 2).toString());
                     
                    Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 3));
-                    TxtD.setDate(date);
+                   TxtD.setDate(date);
                     
                     TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                     txt_choosen_file.setText(model.getValueAt(i, 5).toString());
                     TxtNai.setText(model.getValueAt(i, 6).toString());
-                    TxtP.setText(model.getValueAt(i, 7).toString());
+                    TxtRes.setText(model.getValueAt(i, 7).toString());
                     TxtAn.setText(model.getValueAt(i, 8).toString());
                     TxtC2.setSelectedItem(model.getValueAt(i, 9).toString());
                     TxtPe.setText(model.getValueAt(i, 10).toString());
@@ -874,7 +876,7 @@ public class Inscriptions extends javax.swing.JFrame {
     }//GEN-LAST:event_TxtNaiActionPerformed
 
     private void ModifierEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierEtudiantActionPerformed
-        
+
                 ModifierEtudiant();
                 ActualiserEtudiants();
                  Vider();       
