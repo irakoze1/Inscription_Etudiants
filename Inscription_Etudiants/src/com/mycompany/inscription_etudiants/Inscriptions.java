@@ -179,6 +179,7 @@ public class Inscriptions extends javax.swing.JFrame {
                            txt_choosen_file.setText("");
                            txt_choosen_file.setVisible(false);
                            lbl_image.setVisible(false);
+                           
                            TxtNai.setText("");
                            TxtRes.setText("");
                            TxtAn.setText("");
@@ -205,6 +206,7 @@ public class Inscriptions extends javax.swing.JFrame {
                                 TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                                 
                                 ImageIcon image = new ImageIcon(model.getValueAt(i, 5).toString());
+                                
                                 lbl_image.setIcon(scaledImage(image));
                                 
                                 TxtNai.setText(model.getValueAt(i, 6).toString());
@@ -352,7 +354,6 @@ public class Inscriptions extends javax.swing.JFrame {
         Rechercher = new javax.swing.JTextField();
         ComboRecherch = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableIns = new javax.swing.JTable();
@@ -434,9 +435,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
         jPanel4.add(jLabel1, gridBagConstraints);
-
-        jButton2.setText("jButton2");
-        jPanel4.add(jButton2, new java.awt.GridBagConstraints());
 
         jPanel5.add(jPanel4);
 
@@ -793,6 +791,7 @@ public class Inscriptions extends javax.swing.JFrame {
         jPanel5.add(jPanel1);
 
         BntActualiser.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        BntActualiser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/actualiz.png"))); // NOI18N
         BntActualiser.setText("Actualiser");
         BntActualiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -801,6 +800,7 @@ public class Inscriptions extends javax.swing.JFrame {
         });
 
         ModifierEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        ModifierEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modify.png"))); // NOI18N
         ModifierEtudiant.setText("Modifier");
         ModifierEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -809,6 +809,7 @@ public class Inscriptions extends javax.swing.JFrame {
         });
 
         SuprimerEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        SuprimerEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         SuprimerEtudiant.setText("Suprimer");
         SuprimerEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -817,10 +818,21 @@ public class Inscriptions extends javax.swing.JFrame {
         });
 
         AjouterEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        AjouterEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         AjouterEtudiant.setText("Ajouter");
         AjouterEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AjouterEtudiantActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(0, 255, 204));
+        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard.png"))); // NOI18N
+        jButton3.setText("DASHBOARD");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -829,12 +841,14 @@ public class Inscriptions extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -842,25 +856,22 @@ public class Inscriptions extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jPanel5.add(jPanel2);
-
-        jButton3.setBackground(new java.awt.Color(0, 255, 204));
-        jButton3.setText("DashBoard");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton3);
 
         getContentPane().add(jPanel5);
 
@@ -965,16 +976,12 @@ public class Inscriptions extends javax.swing.JFrame {
             File f = chooser.getSelectedFile();
             String filename = f.getAbsolutePath();
             txt_choosen_file.setText(filename);
-
-
             Image getAbsolutePath = null;
-            
             ImageIcon icon =new ImageIcon(filename);
             Image Foto = icon.getImage();
-            Image modImag = Foto.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH);
+            Image modImag = Foto.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH);
             icon= new ImageIcon(modImag);
             lbl_image.setIcon(icon);
-            Vider();
             
        }catch (Exception e) 
        {
@@ -1058,7 +1065,6 @@ public class Inscriptions extends javax.swing.JFrame {
     private javax.swing.JTextField TxtPe;
     private javax.swing.JTextField TxtRes;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

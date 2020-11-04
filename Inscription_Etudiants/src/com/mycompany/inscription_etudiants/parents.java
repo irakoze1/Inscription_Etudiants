@@ -50,7 +50,7 @@ public class parents extends javax.swing.JFrame {
                        model.addColumn("Fonction Pere");
                        model.addColumn("Fonction Mere");
                        model.addColumn("Address");
-                       model.addColumn("Nom Enfant");
+                       model.addColumn("Matricule Enfant");
                        try {
                             con = Connecter.getConnection();
                             stm = con.createStatement();
@@ -83,7 +83,7 @@ public class parents extends javax.swing.JFrame {
                         String PrenomMere = TxtPMere.getText();
                         String FoctionMere = TxtFMere.getText();
                         String Address = TxtAdd.getText();
-                        String idetudiant = idetud.getToolTipText();
+                        String idetudiant = idetud.getSelectedItem().toString();
                         
                          if(
                            !TxtNPere.getText().isEmpty()&
@@ -107,7 +107,7 @@ public class parents extends javax.swing.JFrame {
                                              + "VALUES('"+NomPere+"','"+PrenomPere+"'"
                                              + ",'"+NomMere+"','"+PrenomMere+"'"
                                              + ",'"+FonctionPere+"','"+FoctionMere+"'"
-                                             + ",'"+Address+",'"+idetudiant+"' )";
+                                             + ",'"+Address+"','"+idetudiant+"' )";
                                         stm.executeUpdate(SqlRe);
                                         
 
@@ -126,7 +126,7 @@ public class parents extends javax.swing.JFrame {
                            model.setRowCount(0);
                             con = Connecter.getConnection();
                             stm = con.createStatement();
-                            rs = stm.executeQuery("SELECT * FROM parents join inscription on parents = inscrition.nom WHERE etat = 0 ORDER BY idp DESC");
+                            rs = stm.executeQuery("SELECT * FROM parents WHERE etat = 0 ORDER BY idp DESC");
                                     while(rs.next()){
                                            model.addRow(new Object[]{
                                                 rs.getString("idp"),
@@ -137,7 +137,7 @@ public class parents extends javax.swing.JFrame {
                                                 rs.getString("fonctionpere"),
                                                 rs.getString("fonctionmere"),
                                                 rs.getString("address"),
-                                                rs.getString("nom")
+                                                rs.getString("matricule")
                                            });
                                     }
                     } catch (SQLException e) {
@@ -159,6 +159,7 @@ public class parents extends javax.swing.JFrame {
                            TxtPPere.setText("");
                            TxtPMere.setText("");
                            TxtAdd.setText("");
+                           idetud.setToolTipText("");
                            
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Probleme de vider les zones de saisi ! " + e.getLocalizedMessage());
@@ -177,6 +178,7 @@ public class parents extends javax.swing.JFrame {
                                 TxtFPere.setText(model.getValueAt(i, 5).toString());
                                 TxtFMere.setText(model.getValueAt(i, 6).toString());
                                 TxtAdd.setText(model.getValueAt(i, 7).toString());
+                                idetud.setSelectedItem(model.getValueAt(i, 8).toString());
                                 
                             } catch (Exception e) {
                          JOptionPane.showMessageDialog(null, "Probleme lors du clic sur la ligne du tableau ! " + e.getLocalizedMessage());
@@ -200,7 +202,8 @@ public class parents extends javax.swing.JFrame {
                            !TxtNMere.getText().isEmpty()&
                            !TxtPPere.getText().isEmpty()&
                            !TxtPMere.getText().isEmpty()&
-                           !TxtAdd.getText().isEmpty());
+                           !TxtAdd.getText().isEmpty()&
+                           !idetud.getSelectedItem().toString().isEmpty())
                    {
                     try{
                         con = Connecter.getConnection();
@@ -213,7 +216,8 @@ public class parents extends javax.swing.JFrame {
                                 + ",prenommere='"+TxtPMere.getText()+"'"
                                 + ",fonctionpere='"+TxtFPere.getText()+"'" 
                                 + ",fonctonmere='"+TxtFMere.getText()+"'"
-                                + ",address='"+TxtAdd.getText()+"'"       
+                                + ",address='"+TxtAdd.getText()+"'"
+                                 + ",matricule='"+idetud.getSelectedItem()+"'"
                                 + " WHERE idp="+Txtidp.getText());
                   
                   ActualiserParents();
@@ -260,7 +264,7 @@ public class parents extends javax.swing.JFrame {
                     TxtFPere.setText(model.getValueAt(i, 5).toString());
                     TxtFMere.setText(model.getValueAt(i, 6).toString());
                     TxtAdd.setText(model.getValueAt(i, 7).toString());
-                    
+                    idetud.setSelectedItem(model.getValueAt(i, 8).toString());
                 }catch(Exception e){
                  
                 JOptionPane.showMessageDialog(null,"erreur de replissage");
@@ -288,7 +292,7 @@ public class parents extends javax.swing.JFrame {
                        stm=con.createStatement();
                        rs = stm.executeQuery(sql);
                        while(rs.next()){
-                           idetud.addItem(rs.getString("nom"));
+                           idetud.addItem(rs.getString("matricule"));
                        }
                 }catch(Exception e){
                  
@@ -651,6 +655,7 @@ public class parents extends javax.swing.JFrame {
         jPanel5.add(jPanel1);
 
         BntActualiser.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        BntActualiser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/actualiz.png"))); // NOI18N
         BntActualiser.setText("Actualiser");
         BntActualiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -659,6 +664,7 @@ public class parents extends javax.swing.JFrame {
         });
 
         ModifierEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        ModifierEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modify.png"))); // NOI18N
         ModifierEtudiant.setText("Modifier");
         ModifierEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -667,6 +673,7 @@ public class parents extends javax.swing.JFrame {
         });
 
         SuprimerEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        SuprimerEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         SuprimerEtudiant.setText("Suprimer");
         SuprimerEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -675,10 +682,21 @@ public class parents extends javax.swing.JFrame {
         });
 
         AjouterEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        AjouterEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         AjouterEtudiant.setText("Ajouter");
         AjouterEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AjouterEtudiantActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(0, 255, 204));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard.png"))); // NOI18N
+        jButton1.setText("DASHBOARD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -688,11 +706,14 @@ public class parents extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -701,24 +722,19 @@ public class parents extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+                            .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel5.add(jPanel2);
-
-        jButton1.setBackground(new java.awt.Color(0, 255, 204));
-        jButton1.setText("DashBoard");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton1);
 
         getContentPane().add(jPanel5);
 
@@ -833,13 +849,13 @@ public class parents extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNMereActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new DashBoard().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void idetudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idetudActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idetudActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new DashBoard().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
