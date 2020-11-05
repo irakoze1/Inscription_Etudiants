@@ -55,8 +55,6 @@ public class Inscriptions extends javax.swing.JFrame {
                        model.addColumn("Lieu de Residence");
                        model.addColumn("Anne Academic");
                        model.addColumn("Faculite");
-                       model.addColumn("Pere");
-                       model.addColumn("Mere");
                        try {
                             con = Connecter.getConnection();
                             stm = con.createStatement();
@@ -71,9 +69,7 @@ public class Inscriptions extends javax.swing.JFrame {
                                         rs.getString("lieunaissance"),
                                         rs.getString("lieuresidence"),
                                         rs.getString("anneacademic"),
-                                        rs.getString("faculite"),
-                                        rs.getString("pere"),
-                                        rs.getString("mere")
+                                        rs.getString("faculite")
                                     });
                                     }
                     } catch (SQLException e) {
@@ -97,8 +93,6 @@ public class Inscriptions extends javax.swing.JFrame {
                         String LieuResidence = TxtRes.getText();
                         String AnneAcademic = TxtAn.getText();
                         String Faculite = TxtC2.getSelectedItem().toString();
-                        String Pere = TxtPe.getText();
-                        String Mere = TxtMe.getText();
                         
                          if(
                            !TxtN.getText().isEmpty()&
@@ -109,9 +103,7 @@ public class Inscriptions extends javax.swing.JFrame {
                            !TxtNai.getText().isEmpty()&
                            !TxtRes.getText().isEmpty()&
                            !TxtAn.getText().isEmpty()&
-                           !TxtC2.getSelectedItem().toString().isEmpty()&
-                           !TxtPe.getText().isEmpty()&
-                           !TxtMe.getText().isEmpty()
+                           !TxtC2.getSelectedItem().toString().isEmpty()
                            );
                          {
                              try{
@@ -121,12 +113,12 @@ public class Inscriptions extends javax.swing.JFrame {
                                              + "(nom,prenom,datenaissance,"
                                              + "sexe,photo,lieunaissance,"
                                              + "lieuresidence,anneacademic,"
-                                             + "faculite,pere,mere)"
+                                             + "faculite)"
                                              + "VALUES('"+Nom+"','"+Prenom+"'"
                                              + ",'"+DateNaissance+"','"+Sexe+"'"
                                              + ",'"+Photo+"','"+LieuNaissance+"'"
                                              + ",'"+LieuResidence+"','"+AnneAcademic+"'"
-                                             + ",'"+Faculite+"','"+Pere+"','"+Mere+"')";
+                                             + ",'"+Faculite+"')";
                                         stm.executeUpdate(SqlRe);         
 
                                        }catch(Exception e)
@@ -156,9 +148,7 @@ public class Inscriptions extends javax.swing.JFrame {
                                                 rs.getString("lieunaissance"),
                                                 rs.getString("lieuresidence"),
                                                 rs.getString("anneacademic"),
-                                                rs.getString("faculite"),
-                                                rs.getString("pere"),
-                                                rs.getString("mere")
+                                                rs.getString("faculite")
                                            });
                                     }
                     } catch (SQLException e) {
@@ -177,14 +167,12 @@ public class Inscriptions extends javax.swing.JFrame {
                           //Date TxtD = new SimpleDateFormat("yyyy-MM-dd").parse((""));
                           //TxtD.setVisible(false);
                            txt_choosen_file.setText("");
-                           txt_choosen_file.setVisible(false);
-                           lbl_image.setVisible(false);
+                           txt_choosen_file.setVisible(true);
+                           lbl_image.setVisible(true);
                            
                            TxtNai.setText("");
                            TxtRes.setText("");
                            TxtAn.setText("");
-                           TxtPe.setText("");
-                           TxtMe.setText("");
                            
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Probleme de vider les zones de saisi ! " + e.getLocalizedMessage());
@@ -213,8 +201,6 @@ public class Inscriptions extends javax.swing.JFrame {
                                 TxtRes.setText(model.getValueAt(i, 7).toString());
                                 TxtAn.setText(model.getValueAt(i, 8).toString());
                                 TxtC2.setSelectedItem(model.getValueAt(i, 9).toString());
-                                TxtPe.setText(model.getValueAt(i, 10).toString());
-                                TxtMe.setText(model.getValueAt(i, 11).toString());
                                 
                             } catch (Exception e) {
                          JOptionPane.showMessageDialog(null, "Probleme lors du clic sur la ligne du tableau ! " + e.getLocalizedMessage());
@@ -243,9 +229,7 @@ public class Inscriptions extends javax.swing.JFrame {
                            !TxtNai.getText().isEmpty()&
                            !TxtAn.getText().isEmpty() &
                            !TxtC2.getSelectedItem().toString().isEmpty()&
-                           !TxtPe.getText().isEmpty()&
-                           !TxtRes.getText().isEmpty()&
-                           !TxtMe.getText().isEmpty()
+                           !TxtRes.getText().isEmpty()
                         )
                    {
                     try{
@@ -263,8 +247,6 @@ public class Inscriptions extends javax.swing.JFrame {
                                 + ",lieuresidence='"+TxtRes.getText()+"'"
                                 + ",anneacademic='"+TxtAn.getText()+"'"   
                                 + ",faculite='"+TxtC2.getSelectedItem()+"'"
-                                + ",pere='"+TxtPe.getText()+"'"
-                                + ",mere='"+TxtMe.getText()+"'"       
                                 + " WHERE matricule="+TxtM.getText());
                            
                   JOptionPane.showMessageDialog(null, "Modification effectuée!!!");
@@ -312,8 +294,6 @@ public class Inscriptions extends javax.swing.JFrame {
                     TxtRes.setText(model.getValueAt(i, 7).toString());
                     TxtAn.setText(model.getValueAt(i, 8).toString());
                     TxtC2.setSelectedItem(model.getValueAt(i, 9).toString());
-                    TxtPe.setText(model.getValueAt(i, 10).toString());
-                    TxtMe.setText(model.getValueAt(i, 11).toString());
                     
                 }catch(Exception e){
                  
@@ -327,8 +307,6 @@ public class Inscriptions extends javax.swing.JFrame {
                         case 0: return "Matricule";
                         case 1: return "Nom";
                         case 2: return "Prenom";
-                        case 3: return "Pere";
-                        case 4: return "Mere";
                 }
                 return "";
 }
@@ -367,8 +345,6 @@ public class Inscriptions extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         TxtC1 = new javax.swing.JComboBox<>();
         TxtM = new javax.swing.JTextField();
         TxtN = new javax.swing.JTextField();
@@ -376,8 +352,6 @@ public class Inscriptions extends javax.swing.JFrame {
         TxtNai = new javax.swing.JTextField();
         TxtP = new javax.swing.JTextField();
         TxtAn = new javax.swing.JTextField();
-        TxtPe = new javax.swing.JTextField();
-        TxtMe = new javax.swing.JTextField();
         TxtC2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         txt_choosen_file = new javax.swing.JLabel();
@@ -584,31 +558,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel11, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("Pere :");
-        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 46;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jLabel12, gridBagConstraints);
-
-        jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("Mere :");
-        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jLabel13, gridBagConstraints);
-
         TxtC1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculin", "Feminin", "Autres" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
@@ -689,34 +638,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtAn, gridBagConstraints);
-
-        TxtPe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtPeActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 136;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtPe, gridBagConstraints);
-
-        TxtMe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtMeActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtMe, gridBagConstraints);
 
         TxtC2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BST", "BAM" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -826,7 +747,7 @@ public class Inscriptions extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(0, 255, 204));
+        jButton3.setBackground(new java.awt.Color(255, 255, 254));
         jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard.png"))); // NOI18N
         jButton3.setText("DASHBOARD");
@@ -859,10 +780,11 @@ public class Inscriptions extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -990,14 +912,6 @@ public class Inscriptions extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void TxtMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtMeActionPerformed
-
-    private void TxtPeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPeActionPerformed
-
     private void TxtAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtAnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtAnActionPerformed
@@ -1058,19 +972,15 @@ public class Inscriptions extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TxtC2;
     private com.toedter.calendar.JDateChooser TxtD;
     private javax.swing.JTextField TxtM;
-    private javax.swing.JTextField TxtMe;
     private javax.swing.JTextField TxtN;
     private javax.swing.JTextField TxtNai;
     private javax.swing.JTextField TxtP;
-    private javax.swing.JTextField TxtPe;
     private javax.swing.JTextField TxtRes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

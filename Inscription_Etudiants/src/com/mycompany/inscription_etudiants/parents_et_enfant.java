@@ -37,8 +37,6 @@ public class parents_et_enfant extends javax.swing.JFrame {
                 private Connection con = null;
                 private Statement stm;
                 private final DefaultTableModel model;
-                private final int ETAT = 1;
-                private File img;
         
     // Methode pour affichage 
                 public void AfficherParents(){
@@ -79,7 +77,7 @@ public class parents_et_enfant extends javax.swing.JFrame {
                             con = Connecter.getConnection();
                             stm = con.createStatement();
                             rs = stm.executeQuery("SELECT nompere,prenompere,nommere,prenommere,address,nom,prenom "
-                                    + "FROM parents join inscription on parents.idp = inscription.matricule");
+                                    + "FROM parents join inscription on parents.matricule = inscription.matricule");
                                     while(rs.next()){
                                            model.addRow(new Object[]{
                                                 rs.getString("nompere"),
@@ -101,12 +99,12 @@ public class parents_et_enfant extends javax.swing.JFrame {
         // Methode pour les combBox
                 public String ComboRechercher(){
                     switch (ComboRecherch.getSelectedIndex()) {
-                        case 0: return "Nom Pere";
-                        case 1: return "Prenom Pere";
-                        case 2: return "Nom Mere";
-                        case 3: return "Prenom mere";
-                        case 4: return "Nom Enfant";
-                        case 5: return "Prenom Enfant";
+                        case 0: return "nompere";
+                        case 1: return "prenompere";
+                        case 2: return "nommere";
+                        case 3: return "prenom mere";
+                        case 4: return "nom";
+                        case 5: return "prenom";
                 }
                 return "";
         }
@@ -163,7 +161,7 @@ public class parents_et_enfant extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         jPanel4.add(Rechercher, gridBagConstraints);
 
-        ComboRecherch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IdParent", "NomPere", "PrenomPere", "NomMere", "PrenomMere" }));
+        ComboRecherch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "nompere", "prenompere", "nommere", "prenommere", "nom", "prenom" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -195,7 +193,7 @@ public class parents_et_enfant extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IdParent", "NomPere", "PrenomPere", "NomMere", "PrenomMere", "Fonction Pere", "Fonction Mere", "Address"
+                "Nom Pere", "Prenom Pere", "Nom Mere", "Prenom Mere", "Nom Enfant", "Prenom Enfant"
             }
         ));
         TableIns.setShowGrid(true);
@@ -226,7 +224,7 @@ public class parents_et_enfant extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 255, 204));
+        jButton1.setBackground(new java.awt.Color(255, 255, 254));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard.png"))); // NOI18N
         jButton1.setText("DashBoard");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -242,9 +240,9 @@ public class parents_et_enfant extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addGap(142, 142, 142))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +251,7 @@ public class parents_et_enfant extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.add(jPanel2);
@@ -273,20 +271,19 @@ public class parents_et_enfant extends javax.swing.JFrame {
                     
                 }else{
                         model.setColumnIdentifiers(new String[]{
-                            "Nom Pere", 
-                            "Prenom Pere", 
-                            "Nom Mere", 
-                            "Prenom Mere",  
-                            "Nom Enfant", 
-                            "Prenom Enfant", 
-                            "Address"
+                            "nompere", 
+                            "prenompere", 
+                            "nommere", 
+                            "prenommere",  
+                            "nom", 
+                            "prenom"
                         });
                         boolean Verify = true;
                         model.setRowCount(0);
                         stm = con.createStatement();
                         
-                        rs = stm.executeQuery("SELECT nompere,prenompere,nommere,prenommere,address,nom,prenom "
-                                    + "FROM parents join inscription on parents.idp = inscription.matricule "+ ComboRechercher() +" LIKE '%" +Rechercher.getText()+"%' ");
+                        rs = stm.executeQuery("SELECT nompere,prenompere,nommere,prenommere,nom,prenom "
+                                    + "FROM parents join inscription on parents.matricule = inscription.matricule AND "+ ComboRechercher() +" LIKE '%" +Rechercher.getText()+"%' ");
                         while(rs.next()){
                             Verify = false;
                              model.addRow(new Object[]{
@@ -295,8 +292,7 @@ public class parents_et_enfant extends javax.swing.JFrame {
                                 rs.getString("nommere"),
                                 rs.getString("prenommere"),
                                 rs.getString("nom"),
-                                rs.getString("prenom"),
-                                rs.getString("address")
+                                rs.getString("prenom")
                              });
                         }
                         if(Verify){
