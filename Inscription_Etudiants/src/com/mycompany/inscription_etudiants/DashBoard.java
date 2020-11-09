@@ -59,6 +59,7 @@ public class DashBoard extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Probleme d'affichage du tableau ! " + e.getLocalizedMessage());
                     }
                        TableIns.setModel(model);
+                       ActualiserParents();
                 }
     //FIN du methode d'affichage
                 
@@ -108,6 +109,7 @@ public class DashBoard extends javax.swing.JFrame {
         this.model = new DefaultTableModel();
             initComponents();
             AfficherParents();
+            ActualiserParents();
     }
 
     /**
