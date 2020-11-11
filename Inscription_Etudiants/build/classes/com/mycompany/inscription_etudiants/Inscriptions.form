@@ -414,11 +414,7 @@
                   <Font name="Lucida Grande" size="18" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-<<<<<<< HEAD
-                <Property name="text" type="java.lang.String" value="Prenom :"/>
-=======
                 <Property name="text" type="java.lang.String" value="Residence :"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
                 <Property name="horizontalTextPosition" type="int" value="4"/>
               </Properties>
               <Constraints>
@@ -463,11 +459,7 @@
                   <Font name="Lucida Grande" size="18" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-<<<<<<< HEAD
-                <Property name="text" type="java.lang.String" value="Residence :"/>
-=======
                 <Property name="text" type="java.lang.String" value="Prenom :"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
                 <Property name="horizontalTextPosition" type="int" value="2"/>
               </Properties>
               <Constraints>
@@ -506,39 +498,6 @@
                 </Constraint>
               </Constraints>
             </Component>
-<<<<<<< HEAD
-            <Component class="javax.swing.JLabel" name="jLabel12">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Grande" size="18" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Pere :"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="3" gridY="6" gridWidth="1" gridHeight="1" fill="2" ipadX="46" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="1.0"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel13">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Grande" size="18" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Mere :"/>
-                <Property name="horizontalTextPosition" type="int" value="4"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="7" gridY="6" gridWidth="1" gridHeight="1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="0.0" weightY="1.0"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-=======
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
             <Component class="javax.swing.JComboBox" name="TxtC1">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -575,15 +534,9 @@
                 </Constraint>
               </Constraints>
             </Component>
-<<<<<<< HEAD
-            <Component class="javax.swing.JTextField" name="TxtP">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtPActionPerformed"/>
-=======
             <Component class="javax.swing.JTextField" name="TxtRes">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtResActionPerformed"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -591,19 +544,6 @@
                 </Constraint>
               </Constraints>
             </Component>
-<<<<<<< HEAD
-            <Component class="javax.swing.JTextField" name="TxtD">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtDActionPerformed"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="5" gridY="0" gridWidth="1" gridHeight="1" fill="2" ipadX="101" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="2.0" weightY="0.0"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-=======
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
             <Component class="javax.swing.JTextField" name="TxtNai">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtNaiActionPerformed"/>
@@ -614,15 +554,9 @@
                 </Constraint>
               </Constraints>
             </Component>
-<<<<<<< HEAD
-            <Component class="javax.swing.JTextField" name="TxtRes">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtResActionPerformed"/>
-=======
             <Component class="javax.swing.JTextField" name="TxtP">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtPActionPerformed"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -636,31 +570,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-<<<<<<< HEAD
-                  <GridBagConstraints gridX="5" gridY="4" gridWidth="1" gridHeight="-1" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="2.0" weightY="0.0"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="TxtPe">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtPeActionPerformed"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="5" gridY="6" gridWidth="1" gridHeight="1" fill="2" ipadX="136" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="2.0" weightY="0.0"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-            <Component class="javax.swing.JTextField" name="TxtMe">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TxtMeActionPerformed"/>
-              </Events>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-                  <GridBagConstraints gridX="9" gridY="6" gridWidth="1" gridHeight="2" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="2.0" weightY="0.0"/>
-=======
                   <GridBagConstraints gridX="5" gridY="4" gridWidth="1" gridHeight="2" fill="2" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="18" weightX="2.0" weightY="0.0"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
                 </Constraint>
               </Constraints>
             </Component>
@@ -752,8 +662,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="lbl_image" pref="88" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
-=======
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -803,59 +711,16 @@
                               <Component id="SuprimerEtudiant" min="-2" pref="173" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jButton3" max="32767" attributes="0"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="BntActualiser" min="-2" pref="173" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
-<<<<<<< HEAD
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbl_image">
-                  <Properties>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[90, 90]"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel2">
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="AjouterEtudiant" min="-2" pref="173" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="ModifierEtudiant" min="-2" pref="173" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="SuprimerEtudiant" min="-2" pref="173" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BntActualiser" min="-2" pref="173" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-=======
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-<<<<<<< HEAD
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="AjouterEtudiant" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="ModifierEtudiant" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="SuprimerEtudiant" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="BntActualiser" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
-=======
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -874,7 +739,6 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButton3" pref="54" max="32767" attributes="0"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -882,37 +746,10 @@
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JButton" name="BntActualiser">
-<<<<<<< HEAD
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Grande" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Actualiser"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BntActualiserActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="ModifierEtudiant">
-=======
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Grande" size="18" style="1"/>
-                </Property>
-<<<<<<< HEAD
-                <Property name="text" type="java.lang.String" value="Modifier"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModifierEtudiantActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="SuprimerEtudiant">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Lucida Grande" size="18" style="1"/>
-                </Property>
-=======
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/actualiz.png"/>
                 </Property>
@@ -944,7 +781,6 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/delete.png"/>
                 </Property>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
                 <Property name="text" type="java.lang.String" value="Suprimer"/>
               </Properties>
               <Events>
@@ -955,19 +791,14 @@
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Lucida Grande" size="18" style="1"/>
-<<<<<<< HEAD
-=======
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/images/add.png"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ajouter"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AjouterEtudiantActionPerformed"/>
-<<<<<<< HEAD
-=======
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton3">
@@ -985,7 +816,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
->>>>>>> b7f3f7d385fcaf9cdee9810c12fd914334b027be
               </Events>
             </Component>
           </SubComponents>
