@@ -5,6 +5,7 @@
  */
 package com.mycompany.inscription_etudiants;
 
+import com.toedter.calendar.JCalendar;
 import java.awt.Graphics;
 import java.awt.HeadlessException;
 import java.awt.Image;
@@ -15,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -38,7 +41,7 @@ public class Inscriptions extends javax.swing.JFrame {
                 private Statement stm;
                 private final DefaultTableModel model;
                 private final int ETAT = 1;
-    private File img;
+                private File img;
         
     // Methode pour affichage 
                 public void AfficherEtudiants(){
@@ -52,8 +55,6 @@ public class Inscriptions extends javax.swing.JFrame {
                        model.addColumn("Lieu de Residence");
                        model.addColumn("Anne Academic");
                        model.addColumn("Faculite");
-                       model.addColumn("Pere");
-                       model.addColumn("Mere");
                        try {
                             con = Connecter.getConnection();
                             stm = con.createStatement();
@@ -68,9 +69,7 @@ public class Inscriptions extends javax.swing.JFrame {
                                         rs.getString("lieunaissance"),
                                         rs.getString("lieuresidence"),
                                         rs.getString("anneacademic"),
-                                        rs.getString("faculite"),
-                                        rs.getString("pere"),
-                                        rs.getString("mere")
+                                        rs.getString("faculite")
                                     });
                                     }
                     } catch (SQLException e) {
@@ -84,27 +83,28 @@ public class Inscriptions extends javax.swing.JFrame {
                 public void AjouterEtudiant(){
                         String Nom = TxtN.getText().toUpperCase();
                         String Prenom = TxtP.getText();
-                        String DateNaissance = TxtD.getText();
+                        
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                        String DateNaissance = sdf.format(TxtD.getDate());
+                        
                         String Sexe = TxtC1.getSelectedItem().toString();
                         String Photo = txt_choosen_file.getText();
                         String LieuNaissance = TxtNai.getText();
                         String LieuResidence = TxtRes.getText();
                         String AnneAcademic = TxtAn.getText();
                         String Faculite = TxtC2.getSelectedItem().toString();
-                        String Pere = TxtPe.getText();
-                        String Mere = TxtMe.getText();
                         
-                         if(!TxtN.getText().equals("")&&
-                           (!TxtP.getText().equals(""))&&
-                           (!TxtD.getText().equals(""))&&
-                           (!TxtC1.getSelectedItem().equals(""))&&
-                           (!txt_choosen_file.getText().equals(""))&&
-                           (!TxtNai.getText().equals(""))&&
-                           (!TxtRes.getText().equals(""))&&
-                           (!TxtAn.getText().equals(""))&&
-                           (!TxtC2.getSelectedItem().equals(""))&&
-                           (!TxtPe.getText().equals(""))&&
-                           (!TxtMe.getText().equals("")));
+                         if(
+                           !TxtN.getText().isEmpty()&
+                           !TxtP.getText().isEmpty()&
+                           !TxtD.getDate().equals("")&
+                           !TxtC1.getSelectedItem().toString().isEmpty()&
+                           !txt_choosen_file.getText().isEmpty()&
+                           !TxtNai.getText().isEmpty()&
+                           !TxtRes.getText().isEmpty()&
+                           !TxtAn.getText().isEmpty()&
+                           !TxtC2.getSelectedItem().toString().isEmpty()
+                           );
                          {
                              try{
                                  con = Connecter.getConnection();
@@ -113,12 +113,12 @@ public class Inscriptions extends javax.swing.JFrame {
                                              + "(nom,prenom,datenaissance,"
                                              + "sexe,photo,lieunaissance,"
                                              + "lieuresidence,anneacademic,"
-                                             + "faculite,pere,mere)"
+                                             + "faculite)"
                                              + "VALUES('"+Nom+"','"+Prenom+"'"
                                              + ",'"+DateNaissance+"','"+Sexe+"'"
                                              + ",'"+Photo+"','"+LieuNaissance+"'"
                                              + ",'"+LieuResidence+"','"+AnneAcademic+"'"
-                                             + ",'"+Faculite+"','"+Pere+"','"+Mere+"')";
+                                             + ",'"+Faculite+"')";
                                         stm.executeUpdate(SqlRe);         
 
                                        }catch(Exception e)
@@ -148,9 +148,7 @@ public class Inscriptions extends javax.swing.JFrame {
                                                 rs.getString("lieunaissance"),
                                                 rs.getString("lieuresidence"),
                                                 rs.getString("anneacademic"),
-                                                rs.getString("faculite"),
-                                                rs.getString("pere"),
-                                                rs.getString("mere")
+                                                rs.getString("faculite")
                                            });
                                     }
                     } catch (SQLException e) {
@@ -163,17 +161,18 @@ public class Inscriptions extends javax.swing.JFrame {
                 /* Methode Pour Vide */
                 public void Vider(){
                         try {
-                            
                            TxtM.setText("");
                            TxtN.setText("");
                            TxtP.setText("");
-                           TxtD.setText("");
+                          //Date TxtD = new SimpleDateFormat("yyyy-MM-dd").parse((""));
+                          //TxtD.setVisible(false);
                            txt_choosen_file.setText("");
+                           txt_choosen_file.setVisible(true);
+                           lbl_image.setVisible(true);
+                           
                            TxtNai.setText("");
                            TxtRes.setText("");
                            TxtAn.setText("");
-                           TxtPe.setText("");
-                           TxtMe.setText("");
                            
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Probleme de vider les zones de saisi ! " + e.getLocalizedMessage());
@@ -183,74 +182,78 @@ public class Inscriptions extends javax.swing.JFrame {
                 
                 /* Methode pour recuperer la ligne du tableau */
                 public void Recuper(int i){
+                        
                         try {
                                 TxtM.setText(model.getValueAt(i, 0).toString());
                                 TxtN.setText(model.getValueAt(i, 1).toString());
                                 TxtP.setText(model.getValueAt(i, 2).toString());
-                                TxtD.setText(model.getValueAt(i, 3).toString());
+                                
+                                Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 3));
+                                TxtD.setDate(date);
+                                
                                 TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
+                                
                                 ImageIcon image = new ImageIcon(model.getValueAt(i, 5).toString());
+                                
                                 lbl_image.setIcon(scaledImage(image));
+                                
                                 TxtNai.setText(model.getValueAt(i, 6).toString());
                                 TxtRes.setText(model.getValueAt(i, 7).toString());
                                 TxtAn.setText(model.getValueAt(i, 8).toString());
                                 TxtC2.setSelectedItem(model.getValueAt(i, 9).toString());
-                                TxtPe.setText(model.getValueAt(i, 10).toString());
-                                TxtMe.setText(model.getValueAt(i, 11).toString());
+                                
                             } catch (Exception e) {
                          JOptionPane.showMessageDialog(null, "Probleme lors du clic sur la ligne du tableau ! " + e.getLocalizedMessage());
                     }
                 }
+                
                 public ImageIcon scaledImage(ImageIcon img){
                     Image image = img.getImage();
                     image = image.getScaledInstance(90, 90, Image.SCALE_SMOOTH);
                     return new ImageIcon(image);
                 }
+                
                 /* FIN du Methode pour recuperer la ligne du tableau */
                 
                 /* Methode Pour Modifier un Etudiant*/
                  public void ModifierEtudiant(){
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+                        String DateNaissance = sdf.format(TxtD.getDate());
                      
                         if(
                            !TxtN.getText().isEmpty()&
                            !TxtP.getText().isEmpty()&
-                           !TxtD.getText().isEmpty()&
+                           !(sdf.format(TxtD.getDate()).isEmpty()) &
                            !TxtC1.getSelectedItem().toString().isEmpty()&
                            !txt_choosen_file.getText().isEmpty()&
                            !TxtNai.getText().isEmpty()&
-                           !TxtRes.getText().isEmpty()&
-                           !TxtAn.getText().isEmpty()&
+                           !TxtAn.getText().isEmpty() &
                            !TxtC2.getSelectedItem().toString().isEmpty()&
-                           !TxtPe.getText().isEmpty()&
-                           !TxtMe.getText().isEmpty());
+                           !TxtRes.getText().isEmpty()
+                        )
                    {
                     try{
                         con = Connecter.getConnection();
                            stm=con.createStatement();
+                           String Photo = txt_choosen_file.getText();
                            
                            stm.executeUpdate("UPDATE inscription SET "
                                 + "nom='"+TxtN.getText()+"'"
                                 + ",prenom='"+ TxtP.getText()+"',"
-                                + "datenaissance='"+TxtD.getText()+"'"
+                                + "datenaissance='"+sdf.format(TxtD.getDate())+"'"
                                 + ",sexe='"+TxtC1.getSelectedItem()+"'"
-                                + ",photo='"+img.getAbsolutePath()+"'"
+                                + ",photo='"+Photo+"'"
                                 + ",lieunaissance='"+TxtNai.getText()+"'"
                                 + ",lieuresidence='"+TxtRes.getText()+"'"
                                 + ",anneacademic='"+TxtAn.getText()+"'"   
                                 + ",faculite='"+TxtC2.getSelectedItem()+"'"
-                                + ",pere='"+TxtPe.getText()+"'"
-                                + ",mere='"+TxtMe.getText()+"'"       
                                 + " WHERE matricule="+TxtM.getText());
-                  
-                  ActualiserEtudiants();
-                  
+                           
                   JOptionPane.showMessageDialog(null, "Modification effectuée!!!");
                  }catch(HeadlessException | SQLException e)
                  {
-                     System.err.println(e);
-                // JOptionPane.showMessageDialog(null, 
-                   //      "Veuillez sélectionner l'enregistrement "
-                     //            + "que vous voulez modifier!!!");   
+                     //System.err.println(" Erreur de Modification effectuée!!!");
+                    JOptionPane.showMessageDialog(null, " Erreur de Modification tof effectuée!!!"+ e);   
                  }         
              }
           }
@@ -281,15 +284,16 @@ public class Inscriptions extends javax.swing.JFrame {
                     TxtM.setText(model.getValueAt(i, 0).toString());
                     TxtN.setText(model.getValueAt(i, 1).toString());
                     TxtP.setText(model.getValueAt(i, 2).toString());
-                    TxtD.setText(model.getValueAt(i, 3).toString());
+                    
+                   Date date = new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 3));
+                   TxtD.setDate(date);
+                    
                     TxtC1.setSelectedItem(model.getValueAt(i, 4).toString());
                     txt_choosen_file.setText(model.getValueAt(i, 5).toString());
                     TxtNai.setText(model.getValueAt(i, 6).toString());
                     TxtRes.setText(model.getValueAt(i, 7).toString());
                     TxtAn.setText(model.getValueAt(i, 8).toString());
                     TxtC2.setSelectedItem(model.getValueAt(i, 9).toString());
-                    TxtPe.setText(model.getValueAt(i, 10).toString());
-                    TxtMe.setText(model.getValueAt(i, 11).toString());
                     
                 }catch(Exception e){
                  
@@ -303,8 +307,6 @@ public class Inscriptions extends javax.swing.JFrame {
                         case 0: return "Matricule";
                         case 1: return "Nom";
                         case 2: return "Prenom";
-                        case 3: return "Pere";
-                        case 4: return "Mere";
                 }
                 return "";
 }
@@ -343,28 +345,25 @@ public class Inscriptions extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         TxtC1 = new javax.swing.JComboBox<>();
         TxtM = new javax.swing.JTextField();
         TxtN = new javax.swing.JTextField();
-        TxtP = new javax.swing.JTextField();
-        TxtD = new javax.swing.JTextField();
-        TxtNai = new javax.swing.JTextField();
         TxtRes = new javax.swing.JTextField();
+        TxtNai = new javax.swing.JTextField();
+        TxtP = new javax.swing.JTextField();
         TxtAn = new javax.swing.JTextField();
-        TxtPe = new javax.swing.JTextField();
-        TxtMe = new javax.swing.JTextField();
         TxtC2 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         txt_choosen_file = new javax.swing.JLabel();
         panel_image = new javax.swing.JPanel();
         lbl_image = new javax.swing.JLabel();
+        TxtD = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         BntActualiser = new javax.swing.JButton();
         ModifierEtudiant = new javax.swing.JButton();
         SuprimerEtudiant = new javax.swing.JButton();
         AjouterEtudiant = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -486,7 +485,7 @@ public class Inscriptions extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Prenom :");
+        jLabel5.setText("Residence :");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 7;
@@ -523,7 +522,7 @@ public class Inscriptions extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel9.setText("Residence :");
+        jLabel9.setText("Prenom :");
         jLabel9.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -559,31 +558,6 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weighty = 1.0;
         jPanel1.add(jLabel11, gridBagConstraints);
 
-        jLabel12.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("Pere :");
-        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 46;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jLabel12, gridBagConstraints);
-
-        jLabel13.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel13.setText("Mere :");
-        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 7;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weighty = 1.0;
-        jPanel1.add(jLabel13, gridBagConstraints);
-
         TxtC1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculin", "Feminin", "Autres" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
@@ -610,9 +584,9 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtN, gridBagConstraints);
 
-        TxtP.addActionListener(new java.awt.event.ActionListener() {
+        TxtRes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtPActionPerformed(evt);
+                TxtResActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -622,21 +596,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 101;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtP, gridBagConstraints);
-
-        TxtD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtDActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 101;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtD, gridBagConstraints);
+        jPanel1.add(TxtRes, gridBagConstraints);
 
         TxtNai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -651,9 +611,9 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtNai, gridBagConstraints);
 
-        TxtRes.addActionListener(new java.awt.event.ActionListener() {
+        TxtP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtResActionPerformed(evt);
+                TxtPActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -663,7 +623,7 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtRes, gridBagConstraints);
+        jPanel1.add(TxtP, gridBagConstraints);
 
         TxtAn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -673,39 +633,11 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtAn, gridBagConstraints);
-
-        TxtPe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtPeActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 5;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.ipadx = 136;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtPe, gridBagConstraints);
-
-        TxtMe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtMeActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 9;
-        gridBagConstraints.gridy = 6;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
-        jPanel1.add(TxtMe, gridBagConstraints);
+        jPanel1.add(TxtAn, gridBagConstraints);
 
         TxtC2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BST", "BAM" }));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -769,9 +701,18 @@ public class Inscriptions extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 7;
         jPanel1.add(panel_image, gridBagConstraints);
 
+        TxtD.setMaximumSize(new java.awt.Dimension(320, 31567));
+        TxtD.setMinimumSize(new java.awt.Dimension(112, 27));
+        TxtD.setPreferredSize(new java.awt.Dimension(222, 27));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 5;
+        gridBagConstraints.gridy = 0;
+        jPanel1.add(TxtD, gridBagConstraints);
+
         jPanel5.add(jPanel1);
 
         BntActualiser.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        BntActualiser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/actualiz.png"))); // NOI18N
         BntActualiser.setText("Actualiser");
         BntActualiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -780,6 +721,7 @@ public class Inscriptions extends javax.swing.JFrame {
         });
 
         ModifierEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        ModifierEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modify.png"))); // NOI18N
         ModifierEtudiant.setText("Modifier");
         ModifierEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -788,6 +730,7 @@ public class Inscriptions extends javax.swing.JFrame {
         });
 
         SuprimerEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        SuprimerEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         SuprimerEtudiant.setText("Suprimer");
         SuprimerEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -796,10 +739,21 @@ public class Inscriptions extends javax.swing.JFrame {
         });
 
         AjouterEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        AjouterEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         AjouterEtudiant.setText("Ajouter");
         AjouterEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AjouterEtudiantActionPerformed(evt);
+            }
+        });
+
+        jButton3.setBackground(new java.awt.Color(255, 255, 254));
+        jButton3.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard.png"))); // NOI18N
+        jButton3.setText("DASHBOARD");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
             }
         });
 
@@ -808,12 +762,14 @@ public class Inscriptions extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -821,12 +777,19 @@ public class Inscriptions extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 54, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -837,33 +800,31 @@ public class Inscriptions extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TxtPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPActionPerformed
+    private void TxtResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtResActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPActionPerformed
-
-    private void TxtDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtDActionPerformed
+    }//GEN-LAST:event_TxtResActionPerformed
 
     private void TxtNaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNaiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNaiActionPerformed
 
     private void ModifierEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierEtudiantActionPerformed
-        try {
+
                 ModifierEtudiant();
-                        
-        } catch (Exception e) {
-             JOptionPane.showMessageDialog(null,"erreur de modification" + e.getLocalizedMessage());
-        }
+                ActualiserEtudiants();
+                 Vider();       
     }//GEN-LAST:event_ModifierEtudiantActionPerformed
 
     private void SuprimerEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuprimerEtudiantActionPerformed
         SupprimerEtudienat();
+        Vider();
+        ActualiserEtudiants();
     }//GEN-LAST:event_SuprimerEtudiantActionPerformed
 
     private void AjouterEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterEtudiantActionPerformed
         AjouterEtudiant();
+        Vider();
+        ActualiserEtudiants();
     }//GEN-LAST:event_AjouterEtudiantActionPerformed
 
     private void RechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RechercherActionPerformed
@@ -923,31 +884,45 @@ public class Inscriptions extends javax.swing.JFrame {
     }//GEN-LAST:event_TableInsMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JFileChooser fc = new JFileChooser();
+       /* JFileChooser fc = new JFileChooser();
         int response = fc.showOpenDialog(this);
         if(response==JFileChooser.APPROVE_OPTION){
             img = fc.getSelectedFile();
             txt_choosen_file.setText(img.getName());
             ImageIcon image = new ImageIcon(img.getAbsolutePath());
             lbl_image.setIcon(scaledImage(image));
+        }*/
+       try{ 
+            JFileChooser chooser = new JFileChooser();
+            chooser.showOpenDialog(null);
+            File f = chooser.getSelectedFile();
+            String filename = f.getAbsolutePath();
+            txt_choosen_file.setText(filename);
+            Image getAbsolutePath = null;
+            ImageIcon icon =new ImageIcon(filename);
+            Image Foto = icon.getImage();
+            Image modImag = Foto.getScaledInstance(90, 90, java.awt.Image.SCALE_SMOOTH);
+            icon= new ImageIcon(modImag);
+            lbl_image.setIcon(icon);
+            
+       }catch (Exception e) 
+       {
+           JOptionPane.showMessageDialog(null, "Probleme de recuperation de l'image ! " + e.getLocalizedMessage());
         }
+       
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void TxtMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtMeActionPerformed
-
-    private void TxtPeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtPeActionPerformed
 
     private void TxtAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtAnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtAnActionPerformed
 
-    private void TxtResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtResActionPerformed
+    private void TxtPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtPActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TxtResActionPerformed
+    }//GEN-LAST:event_TxtPActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new DashBoard().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -995,20 +970,17 @@ public class Inscriptions extends javax.swing.JFrame {
     private javax.swing.JTextField TxtAn;
     private javax.swing.JComboBox<String> TxtC1;
     private javax.swing.JComboBox<String> TxtC2;
-    private javax.swing.JTextField TxtD;
+    private com.toedter.calendar.JDateChooser TxtD;
     private javax.swing.JTextField TxtM;
-    private javax.swing.JTextField TxtMe;
     private javax.swing.JTextField TxtN;
     private javax.swing.JTextField TxtNai;
     private javax.swing.JTextField TxtP;
-    private javax.swing.JTextField TxtPe;
     private javax.swing.JTextField TxtRes;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

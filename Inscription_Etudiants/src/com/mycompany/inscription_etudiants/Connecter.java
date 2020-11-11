@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author liamsi
+ * @author tititofirakoze
  */
 public class Connecter {
    // Declaration des objets

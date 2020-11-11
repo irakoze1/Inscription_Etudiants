@@ -38,7 +38,7 @@ public class parents extends javax.swing.JFrame {
                 private Statement stm;
                 private final DefaultTableModel model;
                 private final int ETAT = 1;
-    private File img;
+                private File img;
         
     // Methode pour affichage 
                 public void AfficherParents(){
@@ -50,6 +50,7 @@ public class parents extends javax.swing.JFrame {
                        model.addColumn("Fonction Pere");
                        model.addColumn("Fonction Mere");
                        model.addColumn("Address");
+                       model.addColumn("Matricule Enfant");
                        try {
                             con = Connecter.getConnection();
                             stm = con.createStatement();
@@ -62,7 +63,8 @@ public class parents extends javax.swing.JFrame {
                                         rs.getString("prenommere"),
                                         rs.getString("fonctionpere"),
                                         rs.getString("fonctionmere"),
-                                        rs.getString("address")
+                                        rs.getString("address"),
+                                        rs.getString("matricule")
                                     });
                                     }
                     } catch (SQLException e) {
@@ -81,6 +83,7 @@ public class parents extends javax.swing.JFrame {
                         String PrenomMere = TxtPMere.getText();
                         String FoctionMere = TxtFMere.getText();
                         String Address = TxtAdd.getText();
+                        String idetudiant = idetud.getSelectedItem().toString();
                         
                          if(
                            !TxtNPere.getText().isEmpty()&
@@ -89,21 +92,24 @@ public class parents extends javax.swing.JFrame {
                            !TxtNMere.getText().isEmpty()&
                            !TxtPMere.getText().isEmpty()&
                            !TxtFMere.getText().isEmpty()&
-                           !TxtAdd.getText().isEmpty()
+                           !TxtAdd.getText().isEmpty()&
+                           !idetud.getSelectedItem().toString().isEmpty()
                            );
                          {
                              try{
                                  con = Connecter.getConnection();
                                     stm = con.createStatement();
+                                    rs = stm.executeQuery("SELECT matricule FROM inscription WHERE etat = 0");
                                      String SqlRe = "insert into parents "
                                              + "(nompere,prenompere,"
                                              + "nommere,prenommere,"
-                                             + "fonctionmere,fonctionpere,address)"
+                                             + "fonctionmere,fonctionpere,address,matricule)"
                                              + "VALUES('"+NomPere+"','"+PrenomPere+"'"
                                              + ",'"+NomMere+"','"+PrenomMere+"'"
                                              + ",'"+FonctionPere+"','"+FoctionMere+"'"
-                                             + ",'"+Address+"')";
-                                        stm.executeUpdate(SqlRe);         
+                                             + ",'"+Address+"','"+idetudiant+"' )";
+                                        stm.executeUpdate(SqlRe);
+                                        
 
                                        }catch(Exception e)
                                        {
@@ -130,7 +136,8 @@ public class parents extends javax.swing.JFrame {
                                                 rs.getString("prenommere"),
                                                 rs.getString("fonctionpere"),
                                                 rs.getString("fonctionmere"),
-                                                rs.getString("address")
+                                                rs.getString("address"),
+                                                rs.getString("matricule")
                                            });
                                     }
                     } catch (SQLException e) {
@@ -152,6 +159,7 @@ public class parents extends javax.swing.JFrame {
                            TxtPPere.setText("");
                            TxtPMere.setText("");
                            TxtAdd.setText("");
+                           idetud.setToolTipText("");
                            
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(null, "Probleme de vider les zones de saisi ! " + e.getLocalizedMessage());
@@ -170,6 +178,7 @@ public class parents extends javax.swing.JFrame {
                                 TxtFPere.setText(model.getValueAt(i, 5).toString());
                                 TxtFMere.setText(model.getValueAt(i, 6).toString());
                                 TxtAdd.setText(model.getValueAt(i, 7).toString());
+                                idetud.setSelectedItem(model.getValueAt(i, 8).toString());
                                 
                             } catch (Exception e) {
                          JOptionPane.showMessageDialog(null, "Probleme lors du clic sur la ligne du tableau ! " + e.getLocalizedMessage());
@@ -193,7 +202,8 @@ public class parents extends javax.swing.JFrame {
                            !TxtNMere.getText().isEmpty()&
                            !TxtPPere.getText().isEmpty()&
                            !TxtPMere.getText().isEmpty()&
-                           !TxtAdd.getText().isEmpty());
+                           !TxtAdd.getText().isEmpty()&
+                           !idetud.getSelectedItem().toString().isEmpty())
                    {
                     try{
                         con = Connecter.getConnection();
@@ -206,7 +216,8 @@ public class parents extends javax.swing.JFrame {
                                 + ",prenommere='"+TxtPMere.getText()+"'"
                                 + ",fonctionpere='"+TxtFPere.getText()+"'" 
                                 + ",fonctonmere='"+TxtFMere.getText()+"'"
-                                + ",address='"+TxtAdd.getText()+"'"       
+                                + ",address='"+TxtAdd.getText()+"'"
+                                 + ",matricule='"+idetud.getSelectedItem()+"'"
                                 + " WHERE idp="+Txtidp.getText());
                   
                   ActualiserParents();
@@ -253,7 +264,7 @@ public class parents extends javax.swing.JFrame {
                     TxtFPere.setText(model.getValueAt(i, 5).toString());
                     TxtFMere.setText(model.getValueAt(i, 6).toString());
                     TxtAdd.setText(model.getValueAt(i, 7).toString());
-                    
+                    idetud.setSelectedItem(model.getValueAt(i, 8).toString());
                 }catch(Exception e){
                  
                 JOptionPane.showMessageDialog(null,"erreur de replissage");
@@ -272,10 +283,27 @@ public class parents extends javax.swing.JFrame {
                 return "";
 }
         
+                //method pour le combo 
+                
+                public void combo(){
+                    String sql = "select * from inscription where etat = 0";
+                    try {
+                        con = Connecter.getConnection();
+                       stm=con.createStatement();
+                       rs = stm.executeQuery(sql);
+                       while(rs.next()){
+                           idetud.addItem(rs.getString("matricule"));
+                       }
+                }catch(Exception e){
+                 
+                JOptionPane.showMessageDialog(null,"erreur de replissage");
+             }
+                }
     public parents() {
         this.model = new DefaultTableModel();
         initComponents();
         AfficherParents();
+        combo();
     }
 
     /**
@@ -313,11 +341,14 @@ public class parents extends javax.swing.JFrame {
         TxtPPere = new javax.swing.JTextField();
         TxtPMere = new javax.swing.JTextField();
         TxtAdd = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        idetud = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         BntActualiser = new javax.swing.JButton();
         ModifierEtudiant = new javax.swing.JButton();
         SuprimerEtudiant = new javax.swing.JButton();
         AjouterEtudiant = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
@@ -565,7 +596,7 @@ public class parents extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 2.0;
@@ -599,9 +630,32 @@ public class parents extends javax.swing.JFrame {
         gridBagConstraints.weightx = 2.0;
         jPanel1.add(TxtAdd, gridBagConstraints);
 
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel3.setText("Ajouter EtudiantID");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 7;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        jPanel1.add(jLabel3, gridBagConstraints);
+
+        idetud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idetudActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 9;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        jPanel1.add(idetud, gridBagConstraints);
+
         jPanel5.add(jPanel1);
 
         BntActualiser.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        BntActualiser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/actualiz.png"))); // NOI18N
         BntActualiser.setText("Actualiser");
         BntActualiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -610,6 +664,7 @@ public class parents extends javax.swing.JFrame {
         });
 
         ModifierEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        ModifierEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/modify.png"))); // NOI18N
         ModifierEtudiant.setText("Modifier");
         ModifierEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -618,6 +673,7 @@ public class parents extends javax.swing.JFrame {
         });
 
         SuprimerEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        SuprimerEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         SuprimerEtudiant.setText("Suprimer");
         SuprimerEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -626,10 +682,21 @@ public class parents extends javax.swing.JFrame {
         });
 
         AjouterEtudiant.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        AjouterEtudiant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add.png"))); // NOI18N
         AjouterEtudiant.setText("Ajouter");
         AjouterEtudiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AjouterEtudiantActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 254));
+        jButton1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/dashboard.png"))); // NOI18N
+        jButton1.setText("DASHBOARD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -639,11 +706,14 @@ public class parents extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -652,12 +722,16 @@ public class parents extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AjouterEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 44, Short.MAX_VALUE)
+                            .addComponent(ModifierEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(SuprimerEtudiant, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(BntActualiser, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel5.add(jPanel2);
@@ -678,6 +752,8 @@ public class parents extends javax.swing.JFrame {
     private void ModifierEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModifierEtudiantActionPerformed
         try {
                 ModifierParent();
+                Vider();
+                ActualiserParents();
                         
         } catch (Exception e) {
              JOptionPane.showMessageDialog(null,"erreur de modification" + e.getLocalizedMessage());
@@ -685,11 +761,15 @@ public class parents extends javax.swing.JFrame {
     }//GEN-LAST:event_ModifierEtudiantActionPerformed
 
     private void SuprimerEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SuprimerEtudiantActionPerformed
-        SupprimerParent();
+                SupprimerParent();
+                Vider();
+                ActualiserParents();
     }//GEN-LAST:event_SuprimerEtudiantActionPerformed
 
     private void AjouterEtudiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterEtudiantActionPerformed
-        AjouterParent();
+                AjouterParent();
+                Vider();
+                ActualiserParents();
     }//GEN-LAST:event_AjouterEtudiantActionPerformed
 
     private void RechercherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RechercherActionPerformed
@@ -730,7 +810,7 @@ public class parents extends javax.swing.JFrame {
                              });
                         }
                         if(Verify){
-                             JOptionPane.showMessageDialog(null,"Desolef il n'y a pas des resultats sur votre recherche");
+                             JOptionPane.showMessageDialog(null,"Desole il n'y a pas des resultats sur votre recherche");
                         }
                         TableIns.setModel(model);
                 }
@@ -768,6 +848,14 @@ public class parents extends javax.swing.JFrame {
     private void TxtNMereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtNMereActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtNMereActionPerformed
+
+    private void idetudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idetudActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idetudActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new DashBoard().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -821,11 +909,14 @@ public class parents extends javax.swing.JFrame {
     private javax.swing.JTextField TxtPMere;
     private javax.swing.JTextField TxtPPere;
     private javax.swing.JTextField Txtidp;
+    private javax.swing.JComboBox<String> idetud;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
